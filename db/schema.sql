@@ -18,7 +18,8 @@ create table if not exists items (
   topic text,
   search tsvector generated always as (
     setweight(to_tsvector('english', coalesce(title, '')), 'A') ||
-    setweight(to_tsvector('english', concat_ws(' ', summary, who, source, topic)), 'B')
+    setweight(to_tsvector('english',
+      coalesce(summary, '') || ' ' || coalesce(who, '') || ' ' || coalesce(source, '') || ' ' || coalesce(topic, '')), 'B')
   ) stored
 );
 create index if not exists items_search on items using gin (search);
