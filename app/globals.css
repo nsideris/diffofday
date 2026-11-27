@@ -97,7 +97,7 @@ ol.alsolist h3 { font: 400 22px/1.14 var(--font-display); margin: 0 0 6px; text-
 .ideas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--ink); }
 .idea { padding: 24px 28px 26px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 10px; align-content: start; }
 .idea:nth-child(2n) { padding-left: 28px; padding-right: 0; border-left: 1px solid var(--rule); }
-.idea.done { opacity: .55; }
+
 .idea .tags { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font: 500 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
 .idea .kind { background: var(--ink); color: var(--paper); padding: 4px 7px; border-radius: 2px; }
 .idea .angle { color: var(--accent); }
