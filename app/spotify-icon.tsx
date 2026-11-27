@@ -8,8 +8,3 @@ export function SpotifyIcon() {
     </svg>
   );
 }
-
-export function spotifySearchUrl(show: string, title: string) {
-  const query = Array.from(`${show} ${title}`).slice(0, 200).join('');
-  return `https://open.spotify.com/search/${encodeURIComponent(query)}/episodes`;
-}

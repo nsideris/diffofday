@@ -1,11 +1,10 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import type { LinkItem, Section } from '@/lib/types';
+import { compact as fmt, feedItems, TOPICS, type FeedItem as Item } from '@/lib/feed-items';
+import type { Section } from '@/lib/types';
 import { ext, safeUrl } from './links';
 
-const TOPICS = ['Models & releases', 'Agents & MCP', 'Coding agents & dev practice', 'Evals & verification',
-  'Infra, inference & tools', 'Security & safety', 'Research & applied ML', 'Industry & society'];
 const SOURCES = ['LinkedIn', 'X', 'GitHub', 'Anthropic', 'Claude', 'OpenAI', 'DeepMind', 'Hugging Face'];
 const ABOUT: Record<string, string> = {
   LinkedIn: 'linkedin.com', X: 'x.com', GitHub: 'github.com/trending · stars gained today',
@@ -17,7 +16,6 @@ const ABOUT: Record<string, string> = {
 };
 
 type Mode = 'topic' | 'source';
-type Item = LinkItem & { topic: string };
 
 function load<T>(key: string, fallback: T): T {
   try { const v = localStorage.getItem(key); return v ? (JSON.parse(v) as T) : fallback; } catch { return fallback; }
@@ -25,24 +23,14 @@ function load<T>(key: string, fallback: T): T {
 function save(key: string, value: unknown) {
   try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* storage unavailable */ }
 }
-const fmt = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, '')}K` : String(n));
 const day = (d?: string) => {
   if (!d) return '';
   const x = new Date(`${d}T12:00:00`);
   return Number.isNaN(x.getTime()) ? d : x.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
 };
-const score = (i: Item) => (i.today != null ? i.today * 1e6 : i.comments != null ? i.comments * 1e3 + (i.likes ?? 0) : (i.likes ?? 0));
 
 export function Feed({ sections }: { sections: Section[] }) {
-  const items = useMemo(() => {
-    const seen = new Set<string>();
-    const all: Item[] = [];
-    for (const s of sections) for (const i of s.items) {
-      const k = `${i.src}|${i.u}|${i.t}`;
-      if (!seen.has(k)) { seen.add(k); all.push({ ...i, topic: i.topic ?? 'Industry & society' }); }
-    }
-    return all.sort((a, b) => score(b) - score(a) || String(b.date ?? '').localeCompare(String(a.date ?? '')));
-  }, [sections]);
+  const items = useMemo(() => feedItems(sections), [sections]);
 
   const [mode, setMode] = useState<Mode>('topic');
   const [only, setOnly] = useState('');

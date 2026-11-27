@@ -1,5 +1,5 @@
 import { editionDates, latestEdition } from '@/lib/editions';
-import { EditionView } from './edition-view';
+import { DiffLogPage } from './diff-log-page';
 import { JsonLd, siteGraph } from './json-ld';
 
 export const dynamic = 'force-dynamic';
@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <>
       <JsonLd data={siteGraph(edition, '/')} />
-      <EditionView edition={edition} archive={archive} isLatest />
+      <DiffLogPage edition={edition} archive={archive} isLatest />
     </>
   );
 }

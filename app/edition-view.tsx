@@ -36,7 +36,8 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
           <span>Updated {athensTime(edition.updated)} EET</span>
         </div>
         <div className="right">
-          <ArchiveSelect dates={archive} current={isLatest ? '' : edition.edition} />
+          <ArchiveSelect dates={archive} current={isLatest ? '' : edition.edition} base="/classic" />
+          <a href={isLatest ? '/' : `/editions/${edition.edition}`}>New view</a>
           <a href="/feed.xml">RSS</a>
           <a href={LINKEDIN} {...ext}>by Nikos Sideris</a>
           <a href="#about">About</a>

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { editionDates, editionOn } from '@/lib/editions';
-import { EditionView } from '../../edition-view';
+import { DiffLogPage } from '../../diff-log-page';
 import { JsonLd, siteGraph } from '../../json-ld';
 
 export const dynamic = 'force-dynamic';
@@ -24,7 +24,7 @@ export default async function EditionPage({ params }: Props) {
   return (
     <>
       <JsonLd data={siteGraph(edition, `/editions/${date}`)} />
-      <EditionView edition={edition} archive={archive} isLatest={archive[0] === date} />
+      <DiffLogPage edition={edition} archive={archive} isLatest={archive[0] === date} />
     </>
   );
 }

@@ -18,7 +18,8 @@ function markdown(body: string, status = 200) {
 
 export async function GET(_req: Request, { params }: { params: Promise<{ path?: string[] }> }) {
   const segments = (await params).path ?? [];
-  const path = `/${segments.join('/')}`.slice(0, 200).replace(/\/+$/, '') || '/';
+  const raw = `/${segments.join('/')}`.slice(0, 200).replace(/\/+$/, '') || '/';
+  const path = raw.replace(/^\/classic(?=\/|$)/, '').replace(/^\/(\d{4}-\d{2}-\d{2})$/, '/editions/$1') || '/';
 
   if (path === '/') {
     const ed = await latestEdition();

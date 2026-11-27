@@ -1,6 +1,6 @@
-import { recentEpisodes, SHOWS } from '@/lib/podcasts';
+import { recentEpisodes, SHOWS, spotifySearchUrl } from '@/lib/podcasts';
 import { ext } from './links';
-import { SpotifyIcon, spotifySearchUrl } from './spotify-icon';
+import { SpotifyIcon } from './spotify-icon';
 
 function when(iso: string) {
   return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
