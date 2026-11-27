@@ -110,6 +110,11 @@ ol.alsolist h3 { font: 400 22px/1.14 var(--font-display); margin: 0 0 6px; text-
 .idea .foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: flex-end; margin-top: 4px; }
 .idea .srcs { display: flex; flex-direction: column; gap: 3px; font-size: 13px; }
 .idea .srcs a { color: var(--accent); text-underline-offset: 3px; }
+.idea .agent { margin-top: 6px; padding: 12px 14px; background: var(--accent-soft); border-radius: 4px; display: grid; gap: 8px; }
+.idea .agent-label { font: 600 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.idea .agent-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.idea .agent-actions .btn { background: var(--surface); text-decoration: none; }
+.idea .agent-cmd { font: 500 11px/1.5 var(--font-mono); color: var(--muted); word-break: break-all; }
 .about-grid p + p { margin-top: 10px; }
 .btn { font: 500 12px/1 var(--font-body); color: var(--muted); background: transparent; border: 1px solid var(--rule); border-radius: 3px; padding: 6px 9px; cursor: pointer; white-space: nowrap; }
 .btn:hover { color: var(--accent); border-color: var(--accent); }

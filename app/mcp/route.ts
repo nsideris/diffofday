@@ -1,6 +1,7 @@
 import { createMcpHandler } from 'mcp-handler';
 import { z } from 'zod';
 import { countToolCall, editionOn, latestEdition, search, trendsSince } from '@/lib/editions';
+import { findIdea, specText } from '@/lib/specs';
 import type { Edition } from '@/lib/types';
 
 function asMarkdown(ed: Edition) {
@@ -27,6 +28,46 @@ const handler = createMcpHandler(
         await countToolCall(name);
         return callback(...args);
       })) as typeof server.registerTool;
+
+    server.registerTool(
+      'get_idea_spec',
+      {
+        title: 'Agent-ready spec for an idea',
+        description: 'The full build spec (problem, goals, non-goals, requirements with acceptance criteria, agent instructions) for one Diff of the Day idea. Defaults to today and idea 1.',
+        inputSchema: z.object({
+          date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional().describe('Date as YYYY-MM-DD; omit for today'),
+          n: z.number().int().min(1).max(20).default(1).describe('Idea number on that day, starting at 1'),
+        }),
+        annotations: { readOnlyHint: true },
+      },
+      async ({ date, n }) => {
+        const found = await findIdea(date, n);
+        return text(found ? specText(found.edition, found.idea, n) : `No idea ${n} for ${date ?? 'today'}.`);
+      },
+    );
+
+    server.registerPrompt(
+      'build_idea',
+      {
+        title: 'Build a Diff of the Day idea',
+        description: "Start building one of the day's side-project ideas from its agent-ready spec.",
+        argsSchema: z.object({
+          n: z.string().regex(/^\d{1,2}$/).optional().describe('Idea number, default 1'),
+          date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional().describe('Date as YYYY-MM-DD, default today'),
+        }),
+      },
+      async ({ n, date }) => {
+        await countToolCall('build_idea_prompt');
+        const index = Number(n ?? '1');
+        const found = await findIdea(date, index);
+        const body = found
+          ? `Build this side project from its spec. Work in a new folder. Start with the P0 requirements, ` +
+            `write tests for each acceptance criterion, follow the Safety rules, and ask me before any step ` +
+            `that needs a key, money or network access the spec does not name.\n\n${specText(found.edition, found.idea, index)}`
+          : `There is no Diff of the Day idea ${index} for ${date ?? 'today'}. Call the ideas_to_try tool and ask me which one to build.`;
+        return { messages: [{ role: 'user' as const, content: { type: 'text' as const, text: body } }] };
+      },
+    );
 
     server.registerTool(
       'latest_edition',

@@ -93,8 +93,8 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
           <section className="block" id="ideas" aria-labelledby="ideas-h">
             <p className="kicker">Ideas to try</p>
             <h2 className="sec" id="ideas-h">Side projects from today&apos;s reading</h2>
-            <p className="sec-note">Each idea comes from today&apos;s stories, with concrete steps and links to where it came from. Pick one for an evening or a weekend.</p>
-            <Ideas ideas={edition.ideas!} />
+            <p className="sec-note">Each idea comes from today&apos;s stories and ships with an agent-ready spec: goals, scope, requirements with acceptance criteria and build steps. Hand it to Claude Code, Codex or Cursor and start building.</p>
+            <Ideas edition={edition} />
           </section>
         )}
 
@@ -154,6 +154,8 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
               <ul className="tools">
                 <li><code>latest_edition</code> Today&apos;s top stories, must-reads and trends</li>
                 <li><code>ideas_to_try</code> Side projects from the day&apos;s stories, with steps</li>
+                <li><code>get_idea_spec</code> The agent-ready build spec for one idea</li>
+                <li><code>build_idea</code> A prompt: your agent fetches the spec and starts building. In Claude Code: <code>/mcp__diffofday__build_idea</code></li>
                 <li><code>get_edition</code> Any past edition by date</li>
                 <li><code>search</code> Full-text search across every story and link</li>
                 <li><code>list_trends</code> The trend lines of recent editions</li>

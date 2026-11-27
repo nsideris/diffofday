@@ -38,6 +38,7 @@ export interface Idea {
   kind?: string;
   angle?: string;
   effort?: string;
+  spec?: string;
 }
 
 export interface Edition {
