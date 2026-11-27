@@ -21,6 +21,8 @@ function Heat({ story }: { story: TopStory }) {
 
 export function EditionView({ edition, archive, isLatest }: { edition: Edition; archive: string[]; isLatest: boolean }) {
   const [lead, ...rest] = edition.top;
+  const side = rest.slice(0, 3);
+  const tier = rest.slice(3);
   const number = archive.length - archive.indexOf(edition.edition);
   return (
     <>
@@ -64,7 +66,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
                 <DiffArt edition={edition} />
               </article>
               <div className="side">
-                {rest.map((s, i) => (
+                {side.map((s, i) => (
                   <article key={s.id}>
                     <span className="n">{i + 2}</span>
                     <div>
@@ -80,6 +82,23 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
                 ))}
               </div>
             </div>
+            {tier.length > 0 && (
+              <div className="tier">
+                {tier.map((s, i) => (
+                  <article key={s.id}>
+                    <span className="n">{i + 5}</span>
+                    <h3><a href={safeUrl(s.u)} {...ext}>{s.h}</a></h3>
+                    {s.summary && <p>{s.summary}</p>}
+                    <div className="byline">
+                      <Heat story={s} />
+                      {s.src && <span>{s.src}</span>}
+                      {s.when && <span>{s.when}</span>}
+                      {s.more && <a href={safeUrl(s.more)} {...ext}>Source</a>}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </section>
         )}
 

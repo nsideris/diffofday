@@ -87,6 +87,15 @@ h2.sec { font: 400 40px/1.05 var(--font-display); margin: 0 0 6px; }
 .side .n { font: 400 30px/1 var(--font-display); color: var(--accent); grid-row: span 3; }
 .side h3 { font: 400 23px/1.12 var(--font-display); margin: 0 0 6px; text-wrap: balance; }
 .side p { margin: 0 0 8px; font-size: 14px; color: var(--muted); }
+.tier { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--ink); }
+.tier article { padding: 0 24px; border-left: 1px solid var(--rule); }
+.tier article:first-child { padding-left: 0; border-left: 0; }
+.tier article:last-child { padding-right: 0; }
+.tier .n { font: 400 30px/1 var(--font-display); color: var(--accent); display: block; margin-bottom: 8px; }
+.tier h3 { font: 400 23px/1.12 var(--font-display); margin: 0 0 8px; text-wrap: balance; }
+.tier h3 a { text-decoration: none; }
+.tier h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.tier p { margin: 0 0 10px; font-size: 14px; color: var(--muted); }
 
 .btn { font: 500 12px/1 var(--font-body); color: var(--muted); background: transparent; border: 1px solid var(--rule); border-radius: 3px; padding: 6px 9px; cursor: pointer; white-space: nowrap; }
 .btn:hover { color: var(--accent); border-color: var(--accent); }
@@ -149,7 +158,8 @@ footer a { color: var(--muted); }
 .loading { padding: 80px 0; text-align: center; color: var(--muted); font-family: var(--font-mono); }
 
 @media (max-width: 860px) {
-  .front, .split, .about-grid { grid-template-columns: 1fr; }
+  .front, .split, .about-grid, .tier { grid-template-columns: 1fr; }
+  .tier article, .tier article:first-child { padding: 0 0 20px; margin-bottom: 20px; border-left: 0; border-bottom: 1px solid var(--rule); }
   .lead, .split > div:first-child { padding-right: 0; border-right: 0; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
   .side, .split > div:last-child { padding-left: 0; padding-top: 24px; }
   .about-grid > div, .about-grid > div + div { padding: 0 0 20px; border-left: 0; }
