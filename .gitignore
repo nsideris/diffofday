@@ -5,3 +5,6 @@ next-env.d.ts
 .env*
 .vercel/
 __pycache__/
+
+.vercel
+.env*
