@@ -30,6 +30,15 @@ export interface LinkItem {
 }
 export interface Section { id: 'network' | 'repos' | 'blogs'; title: string; items: LinkItem[] }
 export interface Ref { t: string; u: string; note?: string }
+export interface Idea {
+  title: string;
+  why: string;
+  steps: string[];
+  sources: { t: string; u: string }[];
+  kind?: string;
+  angle?: string;
+  effort?: string;
+}
 
 export interface Edition {
   edition: string;
@@ -38,6 +47,7 @@ export interface Edition {
   mustread: MustRead[];
   trends: Trend[];
   sections: Section[];
+  ideas?: Idea[];
   notes: string[];
   refs: Ref[];
 }

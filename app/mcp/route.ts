@@ -7,7 +7,11 @@ function asMarkdown(ed: Edition) {
   const top = ed.top.map((s, i) => `${i + 1}. [${s.h}](${s.u})${s.summary ? `\n   ${s.summary}` : ''}`).join('\n');
   const trends = ed.trends.map((t) => `- **${t.name}**: ${t.summary}`).join('\n');
   const must = ed.mustread.map((m) => `- [${m.t}](${m.u})${m.why ? `: ${m.why}` : ''}`).join('\n');
-  return `# Diff of the Day · ${ed.edition}\n\n## Top stories\n${top}\n\n## Must read\n${must}\n\n## Trends\n${trends}\n`;
+  const ideas = (ed.ideas ?? []).map((x) =>
+    `- **${x.title}** (${x.effort ?? 'side project'}): ${x.why}\n${x.steps.map((s, i) => `   ${i + 1}. ${s}`).join('\n')}`).join('\n');
+  return `# Diff of the Day · ${ed.edition}\n\n## Top stories\n${top}\n\n` +
+    (ideas ? `## Ideas to try\n${ideas}\n\n` : '') +
+    `## Must read\n${must}\n\n## Trends\n${trends}\n`;
 }
 
 function text(value: string) {

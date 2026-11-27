@@ -2,6 +2,9 @@ import type { Edition, TopStory } from '@/lib/types';
 import { ArchiveSelect } from './archive-select';
 import { DiffArt } from './diff-art';
 import { Feed } from './feed';
+import { Ideas } from './ideas';
+
+const LINKEDIN = 'https://www.linkedin.com/in/nsideris/';
 import { ext, safeUrl } from './links';
 
 function longDate(date: string) {
@@ -33,6 +36,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
         <div className="right">
           <ArchiveSelect dates={archive} current={isLatest ? '' : edition.edition} />
           <a href="/feed.xml">RSS</a>
+          <a href={LINKEDIN} {...ext}>by Nikos Sideris</a>
           <a href="#about">About</a>
         </div>
       </div></div>
@@ -43,7 +47,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
       </div></header>
 
       <nav className="sectionnav" aria-label="Sections"><div className="wrap">
-        <a href="#top-stories">Top stories</a><a href="#must-read">Must read</a><a href="#feed">The feed</a><a href="#mcp">MCP</a><a href="#about">About</a>
+        <a href="#top-stories">Top stories</a><a href="#ideas">Ideas to try</a><a href="#must-read">Must read</a><a href="#feed">The feed</a><a href="#mcp">MCP</a><a href="#about">About</a>
       </div></nav>
 
       <main className="wrap" id="main">
@@ -82,6 +86,15 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
                 </ol>
               </div>
             </div>
+          </section>
+        )}
+
+        {(edition.ideas?.length ?? 0) > 0 && (
+          <section className="block" id="ideas" aria-labelledby="ideas-h">
+            <p className="kicker">Ideas to try</p>
+            <h2 className="sec" id="ideas-h">Side projects from today&apos;s reading</h2>
+            <p className="sec-note">Each idea comes from today&apos;s stories, with concrete steps and links to where it came from. Pick one for an evening or a weekend.</p>
+            <Ideas ideas={edition.ideas!} />
           </section>
         )}
 
@@ -160,12 +173,13 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
           <div className="about-grid">
             <div>
               <h3>What it is</h3>
-              <p>A morning briefing on AI for software engineers. It leads with what everyone is talking about, then collects the posts, repos and engineering blogs worth reading today.</p>
+              <p>A morning briefing on AI for software engineers. It leads with what everyone is talking about, turns the day&apos;s reading into side projects you can try, then collects the posts, repos and engineering blogs worth reading today.</p>
+              <p>Made and curated by <a href={LINKEDIN} {...ext}>Nikos Sideris</a>. Follow me on <a href={LINKEDIN} {...ext}>LinkedIn</a> for more.</p>
             </div>
           </div>
         </section>
         <footer>
-          <span>Diff of the Day · written with Claude</span>
+          <span>Diff of the Day · made and curated by <a href={LINKEDIN} {...ext}>Nikos Sideris</a> · written with Claude</span>
           {edition.notes.length > 0 && <span>Notes: {edition.notes.join(' ')}</span>}
         </footer>
       </div>
