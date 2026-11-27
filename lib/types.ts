@@ -40,6 +40,18 @@ export interface Idea {
   effort?: string;
   spec?: string;
 }
+export interface Play {
+  company: string;
+  title: string;
+  u: string;
+  author?: string;
+  what: string;
+  why: string;
+  small: string;
+  effort?: string;
+  steps: string[];
+  spec?: string;
+}
 
 export interface Edition {
   edition: string;
@@ -49,6 +61,7 @@ export interface Edition {
   trends: Trend[];
   sections: Section[];
   ideas?: Idea[];
+  bigco?: Play[];
   notes: string[];
   refs: Ref[];
 }

@@ -14,12 +14,16 @@ const ed = JSON.parse(raw) as Edition;
 const SPEC_SECTIONS = new Set(['Problem Statement', 'Goals', 'Non-Goals', 'User Stories', 'Requirements', 'Success Metrics',
   'Open Questions', 'Timeline', 'Agent Instructions', 'Sources']);
 const RISKY = [/\|\s*(ba|z)?sh\b/i, /\bsudo\b/i, /\brm\s+-rf\b/i, /chmod\s+777/i, /curl[^\n]*\|/i, /\beval\b/i, /base64\s+-d/i];
-for (const [i, idea] of (ed.ideas ?? []).entries()) {
-  if (!idea.spec) continue;
-  const unknown = [...idea.spec.matchAll(/^## (.+)$/gm)].map((m) => m[1].trim()).filter((s) => !SPEC_SECTIONS.has(s));
-  const risky = RISKY.filter((r) => r.test(idea.spec!)).map(String);
+const specs = [
+  ...(ed.ideas ?? []).map((x, i) => ({ label: `idea ${i + 1}`, spec: x.spec })),
+  ...(ed.bigco ?? []).map((x, i) => ({ label: `playbook ${i + 1}`, spec: x.spec })),
+];
+for (const { label, spec } of specs) {
+  if (!spec) continue;
+  const unknown = [...spec.matchAll(/^## (.+)$/gm)].map((m) => m[1].trim()).filter((s) => !SPEC_SECTIONS.has(s));
+  const risky = RISKY.filter((r) => r.test(spec)).map(String);
   if (unknown.length || risky.length) {
-    console.log(`spec check: idea ${i + 1} blocked, nothing published` +
+    console.log(`spec check: ${label} blocked, nothing published` +
       (unknown.length ? `\n  unknown sections: ${unknown.join(', ')}` : '') +
       (risky.length ? `\n  risky patterns: ${risky.join(', ')}` : ''));
     process.exit(1);

@@ -2,6 +2,7 @@ import type { Edition, TopStory } from '@/lib/types';
 import { ArchiveSelect } from './archive-select';
 import { DiffArt } from './diff-art';
 import { Feed } from './feed';
+import { BigOnes } from './big-ones';
 import { Ideas } from './ideas';
 
 const LINKEDIN = 'https://www.linkedin.com/in/nsideris/';
@@ -47,7 +48,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
       </div></header>
 
       <nav className="sectionnav" aria-label="Sections"><div className="wrap">
-        <a href="#top-stories">Top stories</a><a href="#ideas">Ideas to try</a><a href="#must-read">Must read</a><a href="#feed">The feed</a><a href="#mcp">MCP</a><a href="#about">About</a>
+        <a href="#top-stories">Top stories</a><a href="#ideas">Ideas to try</a><a href="#big-ones">From the big ones</a><a href="#must-read">Must read</a><a href="#feed">The feed</a><a href="#mcp">MCP</a><a href="#about">About</a>
       </div></nav>
 
       <main className="wrap" id="main">
@@ -95,6 +96,15 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
             <h2 className="sec" id="ideas-h">Side projects from today&apos;s reading</h2>
             <p className="sec-note">Each idea comes from today&apos;s stories and ships with an agent-ready spec: goals, scope, requirements with acceptance criteria and build steps. Hand it to Claude Code, Codex or Cursor and start building.</p>
             <Ideas edition={edition} />
+          </section>
+        )}
+
+        {(edition.bigco?.length ?? 0) > 0 && (
+          <section className="block" id="big-ones" aria-labelledby="big-h">
+            <p className="kicker">From the big ones</p>
+            <h2 className="sec" id="big-h">What big tech ships, sized for your team</h2>
+            <p className="sec-note">Big companies publish how they work. Each day one of their engineering posts gets a small-team version: the part that gives most of the value, buildable by one or two people, with a spec your agent can start from.</p>
+            <BigOnes edition={edition} />
           </section>
         )}
 
@@ -154,7 +164,8 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
               <ul className="tools">
                 <li><code>latest_edition</code> Today&apos;s top stories, must-reads and trends</li>
                 <li><code>ideas_to_try</code> Side projects from the day&apos;s stories, with steps</li>
-                <li><code>get_idea_spec</code> The agent-ready build spec for one idea</li>
+                <li><code>small_team_playbook</code> Big-company practices with a small-team version, searchable</li>
+                <li><code>get_idea_spec</code> The agent-ready build spec for an idea or a playbook entry</li>
                 <li><code>build_idea</code> A prompt: your agent fetches the spec and starts building. In Claude Code: <code>/mcp__diffofday__build_idea</code></li>
                 <li><code>get_edition</code> Any past edition by date</li>
                 <li><code>search</code> Full-text search across every story and link</li>
