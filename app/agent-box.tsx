@@ -13,7 +13,6 @@ export function AgentBox({ kind, date, n, spec }: { kind: SpecKind; date: string
         <a className="btn" href={url.replace('https://diffofday.com', '')} {...ext}>spec.md</a>
         <CopyButton text={command} label="Copy command" />
       </div>
-      <code className="agent-cmd">{command}</code>
     </div>
   );
 }

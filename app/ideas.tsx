@@ -9,7 +9,6 @@ export function Ideas({ edition }: { edition: Edition }) {
       {(edition.ideas ?? []).map((x, i) => (
         <article key={x.title} className="idea">
           <div className="tags">
-            <span className="kind">{x.kind ?? 'Idea'}</span>
             {x.angle && <span className="angle">{x.angle}</span>}
             {x.effort && <span className="effort">· {x.effort}</span>}
           </div>

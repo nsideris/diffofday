@@ -47,13 +47,9 @@ export function Feed({ sections }: { sections: Section[] }) {
   const [mode, setMode] = useState<Mode>('topic');
   const [only, setOnly] = useState('');
   const [q, setQ] = useState('');
-  const [hide, setHide] = useState(false);
-  const [read, setRead] = useState<Record<string, number>>({});
 
   useEffect(() => {
     setMode(load<Mode>('dod-mode', 'topic'));
-    setHide(load('dod-hide', false));
-    setRead(load('dod-read', {}));
   }, []);
 
   const groups = useMemo(() => {
@@ -65,17 +61,9 @@ export function Feed({ sections }: { sections: Section[] }) {
     return order.filter((k) => map.has(k)).map((k) => ({ key: k, list: map.get(k)! }));
   }, [items, mode]);
 
-  const toggleRead = (u: string, force?: boolean) => {
-    setRead((prev) => {
-      const next = { ...prev };
-      if (force || !next[u]) next[u] = Date.now(); else delete next[u];
-      save('dod-read', next);
-      return next;
-    });
-  };
   const needle = q.toLowerCase();
-  const visible = (i: Item) => !(hide && read[i.u]) &&
-    (!needle || `${i.t} ${i.desc ?? ''} ${i.topic} ${i.src ?? ''} ${i.who ?? ''}`.toLowerCase().includes(needle));
+  const visible = (i: Item) =>
+    !needle || `${i.t} ${i.desc ?? ''} ${i.topic} ${i.src ?? ''} ${i.who ?? ''}`.toLowerCase().includes(needle);
 
   return (
     <>
@@ -88,7 +76,6 @@ export function Feed({ sections }: { sections: Section[] }) {
           ))}
         </div>
         <input type="search" placeholder="Filter by keyword" aria-label="Filter by keyword" value={q} onChange={(e) => setQ(e.target.value)} />
-        <label><input type="checkbox" checked={hide} onChange={(e) => { setHide(e.target.checked); save('dod-hide', e.target.checked); }} /> Hide read</label>
       </div>
       <div className="chips" role="group" aria-label="Show one group">
         <button className="chip" aria-pressed={only === ''} onClick={() => setOnly('')}>All<span className="c">{items.length}</span></button>
@@ -108,10 +95,10 @@ export function Feed({ sections }: { sections: Section[] }) {
               <ul className="items">
                 {list.length === 0 && <li className="empty">Nothing here with these filters.</li>}
                 {list.map((i) => {
-                  const isRead = !!read[i.u];
+                  const hasStats = i.today != null || i.stars != null || i.comments != null || i.points != null || i.likes != null;
                   return (
-                    <li key={i.u + i.t} className={isRead ? 'read' : ''}>
-                      <a className="t" href={safeUrl(i.u)} {...ext} onClick={() => toggleRead(i.u, true)}>{i.t}</a>
+                    <li key={i.u + i.t}>
+                      <a className="t" href={safeUrl(i.u)} {...ext}>{i.t}</a>
                       {i.desc && <div className="d">{i.desc}</div>}
                       <div className="m">
                         <span className="src">{mode === 'topic' ? i.src : i.topic}</span>
@@ -120,14 +107,15 @@ export function Feed({ sections }: { sections: Section[] }) {
                         {i.date && <span>{day(i.date)}</span>}
                         {i.d && <a href={safeUrl(i.d)} {...ext}>discussion</a>}
                       </div>
-                      <div className="r">
-                        {i.today != null && <><span className="big">+{fmt(i.today)}</span><span>stars today</span></>}
-                        {i.today == null && i.stars != null && <span>{fmt(i.stars)} stars</span>}
-                        {i.comments != null && <><span className="big">{fmt(i.comments)}</span><span>comments</span></>}
-                        {i.points != null && <span>{fmt(i.points)} points</span>}
-                        {i.likes != null && <span>{fmt(i.likes)} likes</span>}
-                        <button className="btn" onClick={() => toggleRead(i.u)}>{isRead ? 'Unread' : 'Mark read'}</button>
-                      </div>
+                      {hasStats && (
+                        <div className="r">
+                          {i.today != null && <><span className="big">+{fmt(i.today)}</span><span>stars today</span></>}
+                          {i.today == null && i.stars != null && <span>{fmt(i.stars)} stars</span>}
+                          {i.comments != null && <><span className="big">{fmt(i.comments)}</span><span>comments</span></>}
+                          {i.points != null && <span>{fmt(i.points)} points</span>}
+                          {i.likes != null && <span>{fmt(i.likes)} likes</span>}
+                        </div>
+                      )}
                     </li>
                   );
                 })}
