@@ -34,9 +34,17 @@ create table if not exists trends (
   primary key (edition, rank)
 );
 
+create table if not exists mcp_calls (
+  day date not null,
+  tool text not null check (tool ~ '^[a-z_]{1,40}$'),
+  calls int not null default 0,
+  primary key (day, tool)
+);
+
 do $$ begin
-  if exists (select from pg_roles where rolname = 'diffofday_reader') then
-    grant usage on schema public to diffofday_reader;
-    grant select on editions, items, trends to diffofday_reader;
+  if exists (select from pg_roles where rolname = 'diffofday_web') then
+    grant usage on schema public to diffofday_web;
+    grant select on editions, items, trends to diffofday_web;
+    grant select, insert, update on mcp_calls to diffofday_web;
   end if;
 end $$;

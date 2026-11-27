@@ -1,6 +1,6 @@
 import { createMcpHandler } from 'mcp-handler';
 import { z } from 'zod';
-import { editionOn, latestEdition, search, trendsSince } from '@/lib/editions';
+import { countToolCall, editionOn, latestEdition, search, trendsSince } from '@/lib/editions';
 import type { Edition } from '@/lib/types';
 
 function asMarkdown(ed: Edition) {
@@ -20,6 +20,14 @@ function text(value: string) {
 
 const handler = createMcpHandler(
   (server) => {
+    const register = server.registerTool.bind(server);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    server.registerTool = ((name: string, config: any, callback: any) =>
+      register(name, config, async (...args: unknown[]) => {
+        await countToolCall(name);
+        return callback(...args);
+      })) as typeof server.registerTool;
+
     server.registerTool(
       'latest_edition',
       {

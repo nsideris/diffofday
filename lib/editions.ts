@@ -38,6 +38,16 @@ export async function search(query: string, limit: number): Promise<SearchHit[]>
   return rows as SearchHit[];
 }
 
+export async function countToolCall(tool: string): Promise<void> {
+  try {
+    await sql()`
+      insert into mcp_calls (day, tool, calls) values (current_date, ${tool}, 1)
+      on conflict (day, tool) do update set calls = mcp_calls.calls + 1`;
+  } catch (error) {
+    console.error('mcp_calls count failed', (error as Error).message);
+  }
+}
+
 export async function trendsSince(days: number): Promise<(Trend & { edition: string })[]> {
   const rows = await sql()`
     select to_char(edition, 'YYYY-MM-DD') as edition, name, n, summary
