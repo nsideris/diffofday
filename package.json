@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit",
     "guard": "node scripts/guard.ts",
     "publish-edition": "node scripts/publish.ts",
+    "prior-art": "node scripts/prior-art.ts",
     "migrate": "node scripts/migrate.ts"
   },
   "dependencies": {

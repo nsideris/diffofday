@@ -262,3 +262,14 @@ main.info h2 { font: 600 13px/1 var(--font-mono); letter-spacing: .08em; text-tr
 main.info p, main.info li { font-size: 16px; line-height: 1.65; }
 main.info a { color: var(--accent); word-break: break-word; }
 .info-nav { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--rule); font: 500 13px var(--font-mono); }
+.idea .prior, .idea .tried { border-top: 1px dashed var(--rule); padding-top: 10px; display: grid; gap: 6px; }
+.idea .prior-label { font: 600 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.idea .prior ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.idea .prior li { display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; font-size: 13px; }
+.idea .prior li a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.idea .prior li a:hover { text-decoration: underline; }
+.idea .prior .meta { font-size: 11px; color: var(--muted); }
+.idea .prior .desc { flex-basis: 100%; color: var(--muted); font-size: 12px; }
+.idea .prior p, .idea .tried p { margin: 0; font-size: 13px; color: var(--muted); }
+.idea .tried code { font: 500 11px var(--font-mono); background: var(--accent-soft); padding: 1px 5px; border-radius: 3px; }
+.idea .tried a { color: var(--accent); }

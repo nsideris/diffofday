@@ -2,6 +2,7 @@ import { createMcpHandler } from 'mcp-handler';
 import { z } from 'zod';
 import { countToolCall, editionOn, latestEdition, search, trendsSince } from '@/lib/editions';
 import { recentEpisodes, SHOWS } from '@/lib/podcasts';
+import { ideaTopic, SPIKE_TOPIC, triesByTopic } from '@/lib/tried-by';
 import { fencedSpec, findSpec, recentPlays, specUrl } from '@/lib/specs';
 import type { Edition } from '@/lib/types';
 
@@ -161,10 +162,18 @@ const handler = createMcpHandler(
       async ({ date }) => {
         const ed = date ? await editionOn(date) : await latestEdition();
         if (!ed?.ideas?.length) return text(`No ideas for ${date ?? 'today'} yet.`);
-        return text(`# Ideas to try · ${ed.edition}\n\n` + ed.ideas.map((x, n) =>
-          `## ${n + 1}. ${x.title}\n*${[x.angle, x.effort].filter(Boolean).join(' · ')}*\n\n${x.why}\n\n` +
-          x.steps.map((s, i) => `${i + 1}. ${s}`).join('\n') +
-          `\n\nSources: ${x.sources.map((s) => `[${s.t}](${s.u})`).join(', ')}`).join('\n\n'));
+        const tries = await triesByTopic();
+        return text(`# Ideas to try · ${ed.edition}\n\n` + ed.ideas.map((x, n) => {
+          const tried = tries.get(ideaTopic(ed.edition, n + 1)) ?? [];
+          const prior = x.priorArt?.length
+            ? `\n\nAlready on GitHub: ${x.priorArt.map((p) => `[${p.repo}](${p.url}) ★${p.stars}`).join(', ')}`
+            : x.priorArt ? '\n\nAlready on GitHub: nothing yet, this one is open.' : '';
+          return `## ${n + 1}. ${x.title}\n*${[x.angle, x.effort].filter(Boolean).join(' · ')}*\n\n${x.why}\n\n` +
+            x.steps.map((s, i) => `${i + 1}. ${s}`).join('\n') +
+            `\n\nSources: ${x.sources.map((s) => `[${s.t}](${s.u})`).join(', ')}` + prior +
+            `\n\nTried by: ${tried.length ? tried.map((t) => `[${t.owner}](${t.url})`).join(', ') : `nobody yet (tag a public repo with ${SPIKE_TOPIC} and ${ideaTopic(ed.edition, n + 1)})`}` +
+            `\n\nSpec: ${specUrl(ed.edition, n + 1)}`;
+        }).join('\n\n'));
       },
     );
 

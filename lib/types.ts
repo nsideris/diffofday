@@ -39,7 +39,10 @@ export interface Idea {
   angle?: string;
   effort?: string;
   spec?: string;
+  search?: string[];
+  priorArt?: PriorArt[];
 }
+export interface PriorArt { repo: string; url: string; stars: number; updated: string; description?: string }
 export interface Play {
   company: string;
   title: string;
