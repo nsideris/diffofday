@@ -1,5 +1,6 @@
 import type { Edition, TopStory } from '@/lib/types';
 import { ArchiveSelect } from './archive-select';
+import { DiffArt } from './diff-art';
 import { Feed } from './feed';
 import { ext, safeUrl } from './links';
 
@@ -60,6 +61,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
                   {lead.when && <span>{lead.when}</span>}
                   {lead.more && <a href={safeUrl(lead.more)} {...ext}>Primary source</a>}
                 </div>
+                <DiffArt edition={edition} />
               </article>
               <div className="side">
                 {rest.map((s, i) => (
@@ -141,14 +143,6 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
               <p>Use it from your tools: <a href="/feed.xml">RSS</a>, <a href="/api/editions/latest">JSON</a>, or MCP at <code>https://diffofday.com/mcp</code>.</p>
             </div>
           </div>
-          {edition.refs.length > 0 && (
-            <p className="sec-note" style={{ marginTop: 24 }}>
-              Related curated maps:{' '}
-              {edition.refs.map((r, i) => (
-                <span key={r.u}>{i > 0 && ' · '}<a href={safeUrl(r.u)} {...ext}>{r.t}</a></span>
-              ))}
-            </p>
-          )}
         </section>
         <footer>
           <span>Diff of the Day · written with Claude</span>

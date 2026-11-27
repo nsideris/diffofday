@@ -66,6 +66,21 @@ h2.sec { font: 400 40px/1.05 var(--font-display); margin: 0 0 6px; }
 .byline a { color: var(--muted); }
 .byline a:hover { color: var(--accent); }
 .heat { font: 500 13px/1 var(--font-mono); font-variant-numeric: tabular-nums; }
+.diffart { margin: 28px 0 0; }
+.diffart svg { display: block; width: 100%; height: auto; }
+.diffart .frame { fill: var(--surface); stroke: var(--rule); }
+.diffart .head, .diffart .hunk, .diffart .add { font: 500 14px var(--font-mono); }
+.diffart .head { fill: var(--muted); }
+.diffart .hunk { fill: var(--accent); }
+.diffart .add { fill: var(--ink); }
+.diffart .addbg { fill: var(--accent-soft); }
+.diffart .cell { fill: var(--accent); }
+.diffart .l0 { fill: var(--rule); }
+.diffart .l1 { opacity: .3; }
+.diffart .l2 { opacity: .5; }
+.diffart .l3 { opacity: .75; }
+.diffart .l4 { opacity: 1; }
+@media (max-width: 860px) { .diffart { display: none; } }
 .side { padding-left: 28px; display: grid; align-content: start; }
 .side article { padding: 0 0 18px; margin: 0 0 18px; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 28px 1fr; gap: 2px 10px; }
 .side article:last-child { border-bottom: 0; margin-bottom: 0; }
