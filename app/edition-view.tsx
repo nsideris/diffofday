@@ -131,14 +131,6 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
               <h3>What it is</h3>
               <p>A morning briefing on AI for software engineers. It leads with what everyone is talking about, then collects the posts, repos and engineering blogs worth reading today.</p>
             </div>
-            <div>
-              <h3>Where it reads</h3>
-              <ul>
-                <li>Top news on X and the most-discussed AI posts on LinkedIn</li>
-                <li>Engineering blogs and AI labs: Anthropic, OpenAI, Google DeepMind, Hugging Face, Microsoft, GitHub</li>
-                <li>GitHub Trending and Hacker News</li>
-              </ul>
-            </div>
           </div>
         </section>
         <footer>
