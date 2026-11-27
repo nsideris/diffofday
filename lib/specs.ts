@@ -7,6 +7,12 @@ export async function findIdea(date: string | undefined, n: number): Promise<{ e
   return edition && idea ? { edition, idea } : null;
 }
 
+export function fencedSpec(spec: string) {
+  const id = crypto.randomUUID().replace(/-/g, '').slice(0, 12);
+  const body = spec.replace(/<{3,}|>{3,}/g, '');
+  return { marker: `SPEC-${id}`, text: `<<<SPEC-${id}\n${body}\nSPEC-${id}>>>` };
+}
+
 export function specUrl(date: string, n: number) {
   return `https://diffofday.com/ideas/${date}/${n}/spec.md`;
 }
