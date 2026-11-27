@@ -95,7 +95,7 @@ ol.alsolist .n { font: 400 32px/1 var(--font-display); color: var(--accent); }
 ol.alsolist h3 { font: 400 22px/1.14 var(--font-display); margin: 0 0 6px; text-wrap: balance; }
 
 .ideas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--ink); }
-.idea { padding: 24px 28px 26px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 10px; align-content: start; }
+.idea { padding: 24px 28px 26px 0; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 10px; }
 .idea:nth-last-child(-n+2) { border-bottom: 0; }
 .idea:nth-child(2n) { padding-left: 28px; padding-right: 0; border-left: 1px solid var(--rule); }
 
@@ -136,7 +136,7 @@ ol.alsolist h3 { font: 400 22px/1.14 var(--font-display); margin: 0 0 6px; text-
 .play .agent-label { font: 600 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
 .play .agent-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .play .agent-actions .btn { background: var(--surface); text-decoration: none; }
-.idea .agent { margin-top: 6px; padding: 12px 14px; background: var(--accent-soft); border-radius: 4px; display: grid; gap: 8px; }
+.idea .agent { margin-top: auto; padding: 12px 14px; background: var(--accent-soft); border-radius: 4px; display: grid; gap: 8px; }
 .idea .agent-label { font: 600 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
 .idea .agent-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .idea .agent-actions .btn { background: var(--surface); text-decoration: none; }
