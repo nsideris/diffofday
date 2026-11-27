@@ -49,6 +49,24 @@ const handler = createMcpHandler(
     );
 
     server.registerTool(
+      'ideas_to_try',
+      {
+        title: 'Ideas to try',
+        description: 'Side-project ideas built from a Diff of the Day edition: why each matters, concrete steps, effort and sources. Defaults to today.',
+        inputSchema: z.object({ date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional().describe('Date as YYYY-MM-DD; omit for today') }),
+        annotations: { readOnlyHint: true },
+      },
+      async ({ date }) => {
+        const ed = date ? await editionOn(date) : await latestEdition();
+        if (!ed?.ideas?.length) return text(`No ideas for ${date ?? 'today'} yet.`);
+        return text(`# Ideas to try · ${ed.edition}\n\n` + ed.ideas.map((x, n) =>
+          `## ${n + 1}. ${x.title}\n*${[x.angle, x.effort].filter(Boolean).join(' · ')}*\n\n${x.why}\n\n` +
+          x.steps.map((s, i) => `${i + 1}. ${s}`).join('\n') +
+          `\n\nSources: ${x.sources.map((s) => `[${s.t}](${s.u})`).join(', ')}`).join('\n\n'));
+      },
+    );
+
+    server.registerTool(
       'search',
       {
         title: 'Search stories',
