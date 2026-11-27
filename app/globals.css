@@ -273,3 +273,5 @@ main.info a { color: var(--accent); word-break: break-word; }
 .idea .prior p, .idea .tried p { margin: 0; font-size: 13px; color: var(--muted); }
 .idea .tried code { font: 500 11px var(--font-mono); background: var(--accent-soft); padding: 1px 5px; border-radius: 3px; }
 .idea .tried a { color: var(--accent); }
+ul.episodes .btn.spotify { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); font-weight: 600; }
+ul.episodes .btn.spotify:hover { border-color: #1DB954; color: var(--ink); }

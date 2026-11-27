@@ -1,5 +1,6 @@
 import { recentEpisodes, SHOWS } from '@/lib/podcasts';
 import { ext } from './links';
+import { SpotifyIcon, spotifySearchUrl } from './spotify-icon';
 
 function when(iso: string) {
   return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
@@ -25,7 +26,10 @@ export async function Listen() {
               <h3>{e.link ? <a href={e.link} {...ext}>{e.title}</a> : e.title}</h3>
               {e.summary && <p>{e.summary}</p>}
               <div className="ep-links">
-                {e.audio && <a className="btn" href={e.audio} {...ext}>Listen</a>}
+                <a className="btn spotify" href={spotifySearchUrl(e.show, e.title)} {...ext} aria-label={`Listen on Spotify: ${e.title}`}>
+                  <SpotifyIcon />Listen on Spotify
+                </a>
+                {e.audio && <a className="btn" href={e.audio} {...ext}>MP3</a>}
                 {e.link && <a className="btn" href={e.link} {...ext}>Episode page</a>}
               </div>
             </li>
