@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { Pool } from '@neondatabase/serverless';
 import type { Edition } from '../lib/types.ts';
-import { findProblems } from './guard.ts';
+import { decodedStrings, findProblems } from './guard.ts';
 
 const file = process.argv[2];
 if (!file) throw new Error('usage: npm run publish-edition -- <edition.json>');
@@ -9,13 +9,12 @@ const url = process.env.DATABASE_URL_WRITE;
 if (!url) throw new Error('Set DATABASE_URL_WRITE (owner role) in the environment first.');
 
 const raw = readFileSync(file, 'utf8');
-const problems = findProblems(raw);
+const ed = JSON.parse(raw) as Edition;
+const problems = [...findProblems(raw), ...findProblems(decodedStrings(ed).join('\n'))];
 if (problems.length) {
   console.log(`guard: blocked, nothing published\n  ${problems.join('\n  ')}`);
   process.exit(1);
 }
-
-const ed = JSON.parse(raw) as Edition;
 if (!/^\d{4}-\d{2}-\d{2}$/.test(ed.edition)) throw new Error(`bad edition date: ${ed.edition}`);
 if (!ed.top?.length) throw new Error('an edition needs at least one top story');
 const httpsOnly = (u: string) => /^https:\/\//.test(u);

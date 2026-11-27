@@ -21,7 +21,16 @@ function privatePatterns(): RegExp[] {
   const file = process.env.DIFFOFDAY_GUARD ?? join(homedir(), '.config', 'diffofday', 'guard-patterns.txt');
   const source = fromEnv ?? (existsSync(file) ? readFileSync(file, 'utf8') : null);
   if (source === null) throw new Error(`guard: pattern file ${file} is missing; refusing to continue`);
-  return source.split(/\r?\n/).map((l) => l.trim()).filter((l) => l && !l.startsWith('#')).map((l) => new RegExp(l, 'i'));
+  const rules = source.split(/\r?\n/).map((l) => l.trim()).filter((l) => l && !l.startsWith('#')).map((l) => new RegExp(l, 'i'));
+  if (!rules.length) throw new Error('guard: no private patterns loaded; refusing to continue');
+  return rules;
+}
+
+export function decodedStrings(value: unknown): string[] {
+  if (typeof value === 'string') return [value];
+  if (Array.isArray(value)) return value.flatMap(decodedStrings);
+  if (value && typeof value === 'object') return Object.entries(value).flatMap(([k, v]) => [k, ...decodedStrings(v)]);
+  return [];
 }
 
 export function findProblems(text: string, checkChannels = true): string[] {
