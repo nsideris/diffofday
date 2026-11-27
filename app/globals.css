@@ -234,3 +234,19 @@ footer a { color: var(--muted); }
   .front { animation: rise .5s ease-out both; }
   @keyframes rise { from { opacity: .001; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 }
+ul.episodes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+ul.episodes li { padding: 20px 28px 22px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 8px; align-content: start; }
+ul.episodes li:nth-child(2n) { padding: 20px 0 22px 28px; border-left: 1px solid var(--rule); }
+ul.episodes .ep-show { display: flex; justify-content: space-between; gap: 10px; font: 600 11px/1.4 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+ul.episodes .ep-show span { color: var(--muted); font-weight: 500; text-transform: none; letter-spacing: 0; white-space: nowrap; }
+ul.episodes h3 { font: 400 24px/1.12 var(--font-display); margin: 0; text-wrap: balance; }
+ul.episodes h3 a { text-decoration: none; }
+ul.episodes h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+ul.episodes p { margin: 0; font-size: 14px; color: var(--muted); }
+ul.episodes .ep-links { display: flex; gap: 8px; }
+ul.episodes .ep-links .btn { text-decoration: none; }
+#listen .sec-note a { color: var(--accent); }
+@media (max-width: 860px) {
+  ul.episodes { grid-template-columns: 1fr; }
+  ul.episodes li, ul.episodes li:nth-child(2n) { padding: 18px 0; border-left: 0; }
+}

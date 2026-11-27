@@ -21,7 +21,8 @@ function privatePatterns(): RegExp[] {
   const file = process.env.DIFFOFDAY_GUARD ?? join(homedir(), '.config', 'diffofday', 'guard-patterns.txt');
   const source = fromEnv ?? (existsSync(file) ? readFileSync(file, 'utf8') : null);
   if (source === null) throw new Error(`guard: pattern file ${file} is missing; refusing to continue`);
-  const rules = source.split(/\r?\n/).map((l) => l.trim()).filter((l) => l && !l.startsWith('#')).map((l) => new RegExp(l, 'i'));
+  const rules = source.split(/\r?\n/).map((l) => l.trim()).filter((l) => l && !l.startsWith('#'))
+    .map((l) => (l.startsWith('cs:') ? new RegExp(l.slice(3)) : new RegExp(l, 'i')));
   if (!rules.length) throw new Error('guard: no private patterns loaded; refusing to continue');
   return rules;
 }

@@ -4,6 +4,7 @@ import { DiffArt } from './diff-art';
 import { Feed } from './feed';
 import { BigOnes } from './big-ones';
 import { Ideas } from './ideas';
+import { Listen } from './listen';
 
 const LINKEDIN = 'https://www.linkedin.com/in/nsideris/';
 import { ext, safeUrl } from './links';
@@ -48,7 +49,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
       </div></header>
 
       <nav className="sectionnav" aria-label="Sections"><div className="wrap">
-        <a href="#top-stories">Top stories</a><a href="#ideas">Ideas to try</a><a href="#big-ones">From the big ones</a><a href="#must-read">Must read</a><a href="#feed">The feed</a><a href="#mcp">MCP</a><a href="#about">About</a>
+        <a href="#top-stories">Top stories</a><a href="#ideas">Ideas to try</a><a href="#big-ones">From the big ones</a>{isLatest && <a href="#listen">Listen</a>}<a href="#must-read">Must read</a><a href="#feed">The feed</a><a href="#mcp">MCP</a><a href="#about">About</a>
       </div></nav>
 
       <main className="wrap" id="main">
@@ -107,6 +108,8 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
             <BigOnes edition={edition} />
           </section>
         )}
+
+        {isLatest && <Listen />}
 
         <section className="block" id="must-read" aria-label="Must read and signals">
           <div className="split">
@@ -167,6 +170,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
                 <li><code>small_team_playbook</code> Big-company practices with a small-team version, searchable</li>
                 <li><code>get_idea_spec</code> The agent-ready build spec for an idea or a playbook entry</li>
                 <li><code>build_idea</code> A prompt: your agent fetches the spec and starts building. In Claude Code: <code>/mcp__diffofday__build_idea</code></li>
+                <li><code>new_episodes</code> New podcast episodes from the shows in Listen</li>
                 <li><code>get_edition</code> Any past edition by date</li>
                 <li><code>search</code> Full-text search across every story and link</li>
                 <li><code>list_trends</code> The trend lines of recent editions</li>
