@@ -336,8 +336,12 @@ ul.episodes .btn.spotify:hover { border-color: #1DB954; color: var(--ink); }
 .dl-foot { display: grid; gap: 6px; padding-top: 18px; padding-bottom: 40px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--muted); }
 .dl-foot a { color: var(--accent); }
 @media (max-width: 860px) {
-  .dl { grid-template-columns: 1fr; gap: 12px; padding-top: 12px; }
-  .dl-nav { position: static; display: flex; overflow-x: auto; gap: 4px; }
+  .dl { grid-template-columns: minmax(0, 1fr); gap: 12px; padding-top: 12px; }
+  .dl-nav { position: static; display: flex; overflow-x: auto; gap: 4px; min-width: 0; scrollbar-width: none; }
+  .dl-hunk h2 button { flex-wrap: wrap; }
+  .dl-hint { display: none; }
+  .dl-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .dl-chips button { flex: none; }
   .dl-nav a { flex: none; border: 1px solid var(--rule); }
   .dl-row { grid-template-columns: 1fr; gap: 2px; }
   .wrap { padding: 0 16px; }
