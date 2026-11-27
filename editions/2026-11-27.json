@@ -1,0 +1,423 @@
+{
+ "edition": "2026-11-27",
+ "updated": "2026-11-27T09:30:00+02:00",
+ "top": [
+  {
+   "id": "2026-11-27-1",
+   "h": "Chinese and North Korean state hackers now run ARTEX, an open-source multi-agent pentest framework, against web apps and APIs",
+   "summary": "Microsoft Threat Intelligence names six groups, including Salt Typhoon and Onyx Sleet, using ARTEX: a Go backend that coordinates LLM agents driving nmap, sqlmap, hydra, nuclei and Metasploit. One campaign made more than 151,000 failed sign-ins at up to 2,900 a minute, and some intrusions reached privileged access in under 3 hours. The repo was pulled from GitHub in October but forks circulate.",
+   "u": "https://www.microsoft.com/en-us/security/blog/2026/11/25/what-defenders-need-to-know-artex-agentic-ai-framework-threat-actors-abuse/",
+   "src": "Microsoft Threat Intelligence · The Register",
+   "when": "Nov 25–26",
+   "more": "https://www.theregister.com/security/2026/11/26/microsoft-hackers-in-china-n-korea-using-artex-ai-tool-to-break-into-global-tech-systems/5312433"
+  },
+  {
+   "id": "2026-11-27-2",
+   "h": "Google will require AI agents to reach Workspace through its MCP servers from 1 February, and the public Gmail server cannot send",
+   "summary": "Google made eight Workspace MCP servers generally available and added an AI Tools Addendum to its API terms. Agents that keep calling the REST APIs drop to Standard quotas: 5,000 MCP requests per project, product and day, where one Gmail search counts as ten. Send, reply, forward and Drive sharing need partner access, and derived data such as embeddings may be capped at 30 days.",
+   "u": "https://techstackups.com/articles/google-workspace-ai-agents-mcp/",
+   "src": "TechStackups · Hacker News",
+   "when": "Nov 24–26",
+   "heat": "308",
+   "heatLabel": "points",
+   "more": "https://news.ycombinator.com/item?id=50653477"
+  },
+  {
+   "id": "2026-11-27-3",
+   "h": "Inconsistent docs make coding agents spend 38% more tokens, even when they get the task right",
+   "summary": "Microsoft ran about 140 agent runs against documentation with planted contradictions. Sonnet 5.5 noticed the conflict but still used stale endpoints in 10 of 15 runs, and inconsistent docs cost 38% more tokens on average. The authors suggest letting agents cross-check docs against the code before they implement.",
+   "u": "https://developer.microsoft.com/blog/do-inconsistent-docs-hurt-ai-coding-agents/",
+   "src": "Microsoft for Developers",
+   "when": "Nov 25–26"
+  },
+  {
+   "id": "2026-11-27-4",
+   "h": "\"Zero data retention\" DeepSeek routes on OpenRouter traced to ByteDance's Ark API",
+   "summary": "An independent researcher fingerprinted inference providers by image-fetch IPs, request-ID and tool-call-ID formats and pricing. The write-up concludes that Novita, StreamLake and Ant Digital forward some DeepSeek traffic to ByteDance, an estimated 120–160B tokens a day for Novita before it lost its ZDR label on 20 Nov. The probe code is public.",
+   "u": "https://kendell.dev/blog/arkwrapper/",
+   "src": "kendell.dev · Hacker News",
+   "when": "Nov 25",
+   "heat": "80",
+   "heatLabel": "points",
+   "more": "https://news.ycombinator.com/item?id=50660273"
+  },
+  {
+   "id": "2026-11-27-5",
+   "h": "GitHub will bill Copilot code review to the organization by default from 30 December",
+   "summary": "For Copilot Business and Enterprise organizations that never saved a billing choice, reviews by licensed members will be charged to the repo-owning organization through AI Credits instead of each member's entitlement. Admins who want the current behaviour must pick \"Member\" in the Copilot policy settings before 30 December.",
+   "u": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization",
+   "src": "GitHub Changelog",
+   "when": "Nov 25"
+  },
+  {
+   "id": "2026-11-27-6",
+   "h": "Training agents to work as a team beat best-of-8 retries at an eighth of the tokens",
+   "summary": "Hugging Face's TRL walkthrough trains one shared Qwen3-0.6B policy for a four-agent task with async GRPO. Success rose from about 7% to 82%, held-out success reached 81%, and tokens per team fell 37%. One attempt by the trained team beat an untrained team with eight retries (82% against 38%) at about 8k tokens instead of 103k. It reproduces on 2×H200 in about 5 hours.",
+   "u": "https://huggingface.co/blog/training-swarms",
+   "src": "Hugging Face",
+   "when": "Nov 26"
+  },
+  {
+   "id": "2026-11-27-7",
+   "h": "NVIDIA open-sources Nemotron 3.5 Parse, a 0.6B document parser with training data and a 7.6× speculative decoder",
+   "summary": "The release ships about 19M synthetic chart, table and multilingual OCR examples and a fine-tuning recipe. SFT plus GRPO raised the ParseBench score from 66.2 to 71.4, and a form-extraction recipe went from 0% to 96.6% first-attempt success. With the DFlash2 speculator one H200 parses about 20 pages a second.",
+   "u": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+   "src": "NVIDIA · Hugging Face",
+   "when": "Nov 26"
+  }
+ ],
+ "mustread": [
+  {
+   "t": "Three breaches, endless leaks: your AI supply chain needs canaries",
+   "u": "https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens",
+   "src": "Dragos",
+   "why": "About 2M canary-seeded prompts showed hosts leaking, resellers keeping prompts and ZDR settings ignored, with a playbook for canary credentials in agent contexts."
+  },
+  {
+   "t": "What defenders need to know about ARTEX",
+   "u": "https://www.microsoft.com/en-us/security/blog/2026/11/25/what-defenders-need-to-know-artex-agentic-ai-framework-threat-actors-abuse/",
+   "src": "Microsoft",
+   "why": "A concrete picture of agentic attacks at machine speed, with hunting queries defenders can run."
+  },
+  {
+   "t": "Do inconsistent docs hurt AI coding agents?",
+   "u": "https://developer.microsoft.com/blog/do-inconsistent-docs-hurt-ai-coding-agents/",
+   "src": "Microsoft for Developers",
+   "why": "A careful experiment on how stale docs steer agents and burn tokens."
+  },
+  {
+   "t": "Is \"sort by impact\" just vibes?",
+   "u": "https://developer.microsoft.com/blog/is-sort-by-impact-just-vibes/",
+   "src": "Microsoft for Developers",
+   "why": "1,500 runs on four models: rankings are consistent, but each model silently picks its own meaning of a vague word. Define your terms in prompts."
+  },
+  {
+   "t": "A practical guide to shipping with Claude Code",
+   "u": "https://claude.dev/blog/the-work-after-you-open-a-pr/",
+   "src": "claude.dev",
+   "why": "How /code-review, /ship, /steward, REVIEW.md and an observe-mode approvals file fit together into one review flow."
+  }
+ ],
+ "trends": [
+  {
+   "name": "Platforms put agents on a meter",
+   "n": 4,
+   "summary": "Google forces agents onto quota-limited MCP servers, GitHub moves Copilot review billing to the org, and heavy users keep hitting hourly and weekly caps on coding agents."
+  },
+  {
+   "name": "Agent input quality is a cost",
+   "n": 4,
+   "summary": "Inconsistent docs cost 38% more tokens, vague prompt words get model-specific meanings, and review guides mined from past comments steer code-review agents."
+  },
+  {
+   "name": "Agentic attacks and opaque supply chains",
+   "n": 3,
+   "summary": "State groups run an open-source multi-agent pentest tool, ZDR routes end at ByteDance, and canary prompts show providers keeping data."
+  },
+  {
+   "name": "Keep the human on taste and decisions",
+   "n": 4,
+   "summary": "jxnl on owning what you ship, Uncle Bob supervising agents a minute or two an hour, and a growing view that product decisions, not code, are now the bottleneck."
+  }
+ ],
+ "sections": [
+  {
+   "id": "network",
+   "title": "From LinkedIn and X",
+   "items": [
+    {
+     "t": "Kent C. Dodds: let the agent's proof-of-change tests be temporary, and run a nightly agent that prunes them",
+     "u": "https://x.com/aiDotEngineer/status/2126073525316604064",
+     "src": "X",
+     "date": "2026-11-26",
+     "topic": "Evals & verification",
+     "who": "AI.Engineer",
+     "likes": 27
+    },
+    {
+     "t": "jxnl (OpenAI): AI can produce the work, but you still own judging it. Build taste and use cheap execution for bigger ideas",
+     "u": "https://x.com/aiDotEngineer/status/2126043320149504246",
+     "src": "X",
+     "date": "2026-11-26",
+     "topic": "Coding agents & dev practice",
+     "who": "AI.Engineer",
+     "likes": 107
+    },
+    {
+     "t": "Brownfield factories: automate the software customers already rely on by first preserving the behaviour they depend on",
+     "u": "https://x.com/aiDotEngineer/status/2125952716434538581",
+     "src": "X",
+     "date": "2026-11-26",
+     "topic": "Coding agents & dev practice",
+     "who": "AI.Engineer",
+     "likes": 85
+    },
+    {
+     "t": "GitHub's new cloud agents shipped across many client surfaces; they run on sandboxes.azure.com, with bigger changes to the stack coming",
+     "u": "https://x.com/davidfowl/status/2126037779234889813",
+     "src": "X",
+     "date": "2026-11-26",
+     "topic": "Agents & MCP",
+     "who": "David Fowler",
+     "likes": 87
+    },
+    {
+     "t": "Inkling2 Mini (Thinking Machines) beat Qwen3.8 27B in an overnight local eval for a 48–64GB box",
+     "u": "https://x.com/dhh/status/2125845831051858053",
+     "src": "X",
+     "date": "2026-11-26",
+     "topic": "Models & releases",
+     "who": "DHH",
+     "likes": 2900
+    },
+    {
+     "t": "Most of his email work is now telling an agent to find, reply to or analyse threads; frontier models make strong executive assistants",
+     "u": "https://x.com/dhh/status/2125842768534593631",
+     "src": "X",
+     "date": "2026-11-26",
+     "topic": "Agents & MCP",
+     "who": "DHH",
+     "likes": 875
+    },
+    {
+     "t": "Cheap, good personalised help in any language on any phone could make wicked problems tractable; too few non-profits are trying",
+     "u": "https://x.com/emollick/status/2126142028060795261",
+     "src": "X",
+     "date": "2026-11-27",
+     "topic": "Industry & society",
+     "who": "Ethan Mollick",
+     "likes": 457
+    },
+    {
+     "t": "Family app built over Thanksgiving: agents work hard while the humans supervise, about a minute or two per hour",
+     "u": "https://x.com/unclebobmartin/status/2125991574169632885",
+     "src": "X",
+     "date": "2026-11-26",
+     "topic": "Coding agents & dev practice",
+     "who": "Uncle Bob Martin",
+     "likes": 331
+    },
+    {
+     "t": "Moved yes/no assistant decisions to a small decision model instead of a full chat turn; about 9 cents so far",
+     "u": "https://x.com/jeffsteinbok/status/2125737394653823219",
+     "src": "X",
+     "date": "2026-11-25",
+     "topic": "Infra, inference & tools",
+     "who": "Jeff Steinbok",
+     "likes": 4
+    },
+    {
+     "t": "Aspire gave his agents an inner loop: run parts of the stack on emulators and query telemetry locally, plus Honeycomb MCP live",
+     "u": "https://x.com/MartinDotNet/status/2125585410826949007",
+     "src": "X",
+     "date": "2026-11-25",
+     "topic": "Infra, inference & tools",
+     "who": "Martin Thwaites",
+     "likes": 7
+    },
+    {
+     "t": "Emily Bache tested fully automated 'dark factory' development and explains why it fails (video)",
+     "u": "https://x.com/ModernSoftwareX/status/2125665832412041591",
+     "src": "X",
+     "date": "2026-11-25",
+     "topic": "Coding agents & dev practice",
+     "who": "Modern Software Engineering",
+     "likes": 18
+    },
+    {
+     "t": "From Warp: enterprises moving fastest to software factories may gain a real edge over the next few years",
+     "u": "https://www.linkedin.com/feed/update/urn:li:activity:7531791466176675840/",
+     "src": "LinkedIn",
+     "date": "2026-11-26",
+     "topic": "Coding agents & dev practice",
+     "who": "Troy Gray"
+    },
+    {
+     "t": "Moved from one terminal tab per Claude Code session to Herdr, and wrote nine mods for reviews and worktrees",
+     "u": "https://www.linkedin.com/in/s3rgiosan/recent-activity/all/",
+     "src": "LinkedIn",
+     "date": "2026-11-26",
+     "topic": "Coding agents & dev practice",
+     "who": "Sergio Santos"
+    },
+    {
+     "t": "Legacy rewrites: keep old behaviour by default, change it only by recorded decision, check exactness where the business sees it",
+     "u": "https://www.linkedin.com/in/pierre-milet-llobet-28827123/recent-activity/all/",
+     "src": "LinkedIn",
+     "date": "2026-11-26",
+     "topic": "Coding agents & dev practice",
+     "who": "Pierre Milet Llobet"
+    },
+    {
+     "t": "Switched his main harness to OpenCode on a flat plan, saying recent Chinese models now pass his checks",
+     "u": "https://www.linkedin.com/feed/update/urn:li:activity:7531695152646623232/",
+     "src": "LinkedIn",
+     "date": "2026-11-26",
+     "topic": "Coding agents & dev practice",
+     "who": "Alexandre Poitevin"
+    },
+    {
+     "t": "Claim: Opus 5.5 and Gemini 4 Neon hand-wrote a Qwen3-0.6B inference engine in raw x86-64 machine code that beat llama.cpp",
+     "u": "https://www.linkedin.com/in/georgehaber/recent-activity/all/",
+     "src": "LinkedIn",
+     "date": "2026-11-27",
+     "topic": "Models & releases",
+     "who": "George Haber"
+    },
+    {
+     "t": "Chrome, Edge, Firefox and MDN open-sourced agent skills that teach coding agents modern web features instead of legacy polyfills",
+     "u": "https://www.linkedin.com/feed/update/urn:li:activity:7531559121746173952/",
+     "src": "LinkedIn",
+     "date": "2026-11-26",
+     "topic": "Agents & MCP",
+     "who": "Shubham Saboo"
+    },
+    {
+     "t": "SWARMY update: one terminal dashboard for Claude Code, Antigravity CLI and Codex usage",
+     "u": "https://www.linkedin.com/in/turskyi/recent-activity/all/",
+     "src": "LinkedIn",
+     "date": "2026-11-25",
+     "topic": "Infra, inference & tools",
+     "who": "Viktor Turskyi"
+    }
+   ]
+  },
+  {
+   "id": "repos",
+   "title": "Trending AI repos",
+   "items": [
+    {
+     "t": "alibaba/open-code-review: AI code review CLI with deterministic file bundling and rule matching plus an LLM agent; claims about 1/9 of Claude Code's tokens",
+     "u": "https://github.com/alibaba/open-code-review",
+     "src": "GitHub",
+     "date": "2026-11-27",
+     "topic": "Coding agents & dev practice",
+     "stars": 56700
+    },
+    {
+     "t": "GoogleChrome/modern-web-guidance-src: agent skills and a CLI covering 269 modern web features, maintained with Edge, Firefox and MDN",
+     "u": "https://github.com/GoogleChrome/modern-web-guidance-src",
+     "src": "GitHub",
+     "date": "2026-11-27",
+     "topic": "Agents & MCP",
+     "stars": 11300
+    },
+    {
+     "t": "backnotprop/plannotator: annotate agent plans and review diffs in a local browser workspace, sending feedback to Claude Code or Codex",
+     "u": "https://github.com/backnotprop/plannotator",
+     "src": "GitHub",
+     "date": "2026-11-27",
+     "topic": "Coding agents & dev practice",
+     "stars": 15300
+    },
+    {
+     "t": "n8n-io/nod: local personal agent with its own computer that asks before acting and keeps logins in a vault",
+     "u": "https://github.com/n8n-io/nod",
+     "src": "GitHub",
+     "date": "2026-11-27",
+     "topic": "Agents & MCP",
+     "stars": 4100
+    },
+    {
+     "t": "superdesigndev/treg: marketplace-style router for agent tools",
+     "u": "https://github.com/superdesigndev/treg",
+     "src": "GitHub",
+     "date": "2026-11-27",
+     "topic": "Agents & MCP",
+     "stars": 9600
+    }
+   ]
+  },
+  {
+   "id": "blogs",
+   "title": "Engineering blogs and labs",
+   "items": [
+    {
+     "t": "Is \"sort by impact\" just vibes? Four models rank consistently but each picks its own meaning of a vague word",
+     "u": "https://developer.microsoft.com/blog/is-sort-by-impact-just-vibes/",
+     "src": "Microsoft",
+     "date": "2026-11-24",
+     "topic": "Evals & verification"
+    },
+    {
+     "t": "Choosing the next safe modernization step: gather evidence, then keep, upgrade, swap, wrap or rewrite each component",
+     "u": "https://github.blog/ai-and-ml/github-copilot/how-to-choose-the-next-safe-step-in-application-modernization/",
+     "src": "GitHub",
+     "date": "2026-11-25",
+     "topic": "Coding agents & dev practice"
+    },
+    {
+     "t": "Cosmos DB preview: atomic transactions across partitions, containers and databases, up to 100 operations",
+     "u": "https://devblogs.microsoft.com/cosmosdb/all-or-nothing-distributed-transactions-in-azure-cosmos-db/",
+     "src": "Azure Cosmos DB",
+     "date": "2026-11-24",
+     "topic": "Infra, inference & tools"
+    },
+    {
+     "t": "DocumentExtractionClient preview: a .NET API that turns PDFs and images into structured content through pluggable providers",
+     "u": "https://devblogs.microsoft.com/dotnet/document-extraction-dotnet-preview/",
+     "src": ".NET Blog",
+     "date": "2026-11-24",
+     "topic": "Infra, inference & tools"
+    },
+    {
+     "t": "llama.cpp benchmark dashboard for AMD Ryzen and Radeon, tracked weekly; a community patch set nearly doubles prefill",
+     "u": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+     "src": "Hugging Face",
+     "date": "2026-11-26",
+     "topic": "Infra, inference & tools"
+    },
+    {
+     "t": "How Clay builds GTM agents: tool-call evals measured the wrong thing, so the agent became a coding agent driving a CLI",
+     "u": "https://latent.space/p/how-clay-builds-gtm-agents-jeff-barg-head-of-ai/",
+     "src": "Latent Space",
+     "date": "2026-11-26",
+     "topic": "Evals & verification"
+    },
+    {
+     "t": "Three LLM inflection points in twelve months: write-up of the AI Engineer Code Summit keynote",
+     "u": "https://simonwillison.net/2026/Nov/24/llm-inflection-points/",
+     "src": "Simon Willison",
+     "date": "2026-11-24",
+     "topic": "Coding agents & dev practice"
+    },
+    {
+     "t": "A practical guide to shipping with Claude Code: /code-review, /ship, /steward and an observe-mode approvals file",
+     "u": "https://claude.dev/blog/the-work-after-you-open-a-pr/",
+     "src": "claude.dev",
+     "date": "2026-11-24",
+     "topic": "Coding agents & dev practice"
+    },
+    {
+     "t": "What's new in Microsoft Foundry at Ignite 2026: agent, model, tooling and governance updates",
+     "u": "https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-ignite-2026/",
+     "src": "Microsoft Foundry",
+     "date": "2026-11-24",
+     "topic": "Infra, inference & tools"
+    }
+   ]
+  }
+ ],
+ "notes": [
+  "26 Nov was US Thanksgiving, so news was thin; some items are from 24–25 Nov.",
+  "Some LinkedIn links go to the author's recent activity because the post URL was not available.",
+  "The raw machine-code inference claim (George Haber) is unverified."
+ ],
+ "refs": [
+  {
+   "t": "AI Native Dev Landscape (Patrick Debois / Tessl)",
+   "u": "https://tessl.io/blog/announcing-the-ai-native-dev-landscape/",
+   "note": "Curated map of 600+ AI dev tools"
+  },
+  {
+   "t": "AI Native Dev patterns (tessl.io/patterns)",
+   "u": "https://tessl.io/podcast/114",
+   "note": "Patrick's auto-generated map of AI-native dev patterns"
+  },
+  {
+   "t": "jedi.be: Patrick Debois's blog",
+   "u": "https://www.jedi.be/",
+   "note": "Talks and notes where software meets AI"
+  }
+ ]
+}
