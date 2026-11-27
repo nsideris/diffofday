@@ -153,12 +153,14 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
               <h3>Tools</h3>
               <ul className="tools">
                 <li><code>latest_edition</code> Today&apos;s top stories, must-reads and trends</li>
+                <li><code>ideas_to_try</code> Side projects from the day&apos;s stories, with steps</li>
                 <li><code>get_edition</code> Any past edition by date</li>
                 <li><code>search</code> Full-text search across every story and link</li>
                 <li><code>list_trends</code> The trend lines of recent editions</li>
               </ul>
               <h3>Try asking</h3>
               <ul className="prompts">
+                <li>Give me today&apos;s ideas to try and help me start the first one.</li>
                 <li>What changed in AI today that matters for a backend team?</li>
                 <li>Search Diff of the Day for MCP quota changes this month.</li>
                 <li>Which trends keep coming back over the last two weeks?</li>
