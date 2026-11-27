@@ -10,6 +10,21 @@ if (!url) throw new Error('Set DATABASE_URL_WRITE (owner role) in the environmen
 
 const raw = readFileSync(file, 'utf8');
 const ed = JSON.parse(raw) as Edition;
+
+const SPEC_SECTIONS = new Set(['Problem Statement', 'Goals', 'Non-Goals', 'User Stories', 'Requirements', 'Success Metrics',
+  'Open Questions', 'Timeline', 'Agent Instructions', 'Sources']);
+const RISKY = [/\|\s*(ba|z)?sh\b/i, /\bsudo\b/i, /\brm\s+-rf\b/i, /chmod\s+777/i, /curl[^\n]*\|/i, /\beval\b/i, /base64\s+-d/i];
+for (const [i, idea] of (ed.ideas ?? []).entries()) {
+  if (!idea.spec) continue;
+  const unknown = [...idea.spec.matchAll(/^## (.+)$/gm)].map((m) => m[1].trim()).filter((s) => !SPEC_SECTIONS.has(s));
+  const risky = RISKY.filter((r) => r.test(idea.spec!)).map(String);
+  if (unknown.length || risky.length) {
+    console.log(`spec check: idea ${i + 1} blocked, nothing published` +
+      (unknown.length ? `\n  unknown sections: ${unknown.join(', ')}` : '') +
+      (risky.length ? `\n  risky patterns: ${risky.join(', ')}` : ''));
+    process.exit(1);
+  }
+}
 const problems = [...findProblems(raw), ...findProblems(decodedStrings(ed).join('\n'))];
 if (problems.length) {
   console.log(`guard: blocked, nothing published\n  ${problems.join('\n  ')}`);
