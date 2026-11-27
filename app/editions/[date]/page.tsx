@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function EditionPage({ params }: Props) {
   const { date } = await params;
-  const [edition, archive] = await Promise.all([editionOn(date), editionDates(14)]);
+  const [edition, archive] = await Promise.all([editionOn(date), editionDates(1000)]);
   if (!edition) notFound();
-  return <EditionView edition={edition} archive={archive} />;
+  return <EditionView edition={edition} archive={archive} isLatest={archive[0] === date} />;
 }
