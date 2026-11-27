@@ -139,11 +139,6 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
                 <li>GitHub Trending and Hacker News</li>
               </ul>
             </div>
-            <div>
-              <h3>How it&apos;s written</h3>
-              <p>An AI agent (Claude) reads the sources every weekday morning, ranks them, and writes the summaries in its own words. Summaries can contain mistakes: follow the links to the original before you rely on a detail.</p>
-              <p>Use it from your tools: <a href="/feed.xml">RSS</a>, <a href="/api/editions/latest">JSON</a>, or MCP at <code>https://diffofday.com/mcp</code>.</p>
-            </div>
           </div>
         </section>
         <footer>
