@@ -43,7 +43,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
       </div></header>
 
       <nav className="sectionnav" aria-label="Sections"><div className="wrap">
-        <a href="#top-stories">Top stories</a><a href="#must-read">Must read</a><a href="#feed">The feed</a><a href="#about">About</a>
+        <a href="#top-stories">Top stories</a><a href="#must-read">Must read</a><a href="#feed">The feed</a><a href="#mcp">MCP</a><a href="#about">About</a>
       </div></nav>
 
       <main className="wrap" id="main">
@@ -123,6 +123,37 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
       </main>
 
       <div className="wrap">
+        <section className="block" id="mcp" aria-labelledby="mcp-h">
+          <p className="kicker">MCP</p>
+          <h2 className="sec" id="mcp-h">Use it from your AI tools</h2>
+          <p className="sec-note">Diff of the Day is also a public, read-only MCP server. Connect it once, then ask your agent about today&apos;s AI news, search past editions or follow the trends.</p>
+          <div className="mcp-grid">
+            <div>
+              <h3>Claude Code</h3>
+              <pre><code>{'claude mcp add --transport http diffofday \\\n  https://diffofday.com/mcp'}</code></pre>
+              <h3>Cursor, VS Code and other clients</h3>
+              <pre><code>{'{\n  "mcpServers": {\n    "diffofday": { "url": "https://diffofday.com/mcp" }\n  }\n}'}</code></pre>
+              <h3>Clients that only run local servers</h3>
+              <pre><code>{'{\n  "mcpServers": {\n    "diffofday": {\n      "command": "npx",\n      "args": ["-y", "mcp-remote", "https://diffofday.com/mcp"]\n    }\n  }\n}'}</code></pre>
+            </div>
+            <div>
+              <h3>Tools</h3>
+              <ul className="tools">
+                <li><code>latest_edition</code> Today&apos;s top stories, must-reads and trends</li>
+                <li><code>get_edition</code> Any past edition by date</li>
+                <li><code>search</code> Full-text search across every story and link</li>
+                <li><code>list_trends</code> The trend lines of recent editions</li>
+              </ul>
+              <h3>Try asking</h3>
+              <ul className="prompts">
+                <li>What changed in AI today that matters for a backend team?</li>
+                <li>Search Diff of the Day for MCP quota changes this month.</li>
+                <li>Which trends keep coming back over the last two weeks?</li>
+              </ul>
+              <p className="sec-note">Prefer plain data? Use the <a href="/feed.xml">RSS feed</a> or the <a href="/api/editions/latest">JSON API</a>.</p>
+            </div>
+          </div>
+        </section>
         <section className="block" id="about" aria-labelledby="about-h">
           <p className="kicker">About</p>
           <h2 className="sec" id="about-h">How this paper is made</h2>

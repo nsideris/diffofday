@@ -142,6 +142,17 @@ ul.items .r { grid-column: 2; grid-row: 1 / span 3; display: grid; justify-items
 ul.items .r .big { font-size: 15px; color: var(--ink); }
 .empty { padding: 14px 0; color: var(--muted); }
 
+.mcp-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 0; }
+.mcp-grid > div:first-child { padding-right: 32px; border-right: 1px solid var(--rule); }
+.mcp-grid > div:last-child { padding-left: 28px; }
+.mcp-grid h3 { font: 600 13px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; margin: 22px 0 10px; }
+.mcp-grid h3:first-child { margin-top: 0; }
+.mcp-grid pre { margin: 0; padding: 14px 16px; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; overflow-x: auto; font: 500 13px/1.55 var(--font-mono); }
+.mcp-grid ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 15px; color: var(--muted); }
+.mcp-grid .tools code { font: 600 13px var(--font-mono); color: var(--accent); margin-right: 8px; }
+.mcp-grid .prompts li { padding-left: 14px; border-left: 2px solid var(--accent); color: var(--ink); }
+.mcp-grid .sec-note { margin-top: 20px; }
+.mcp-grid a { color: var(--accent); }
 .about-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 64ch; }
 .about-grid > div { padding-right: 28px; }
 .about-grid > div + div { padding-left: 28px; border-left: 1px solid var(--rule); }
@@ -155,7 +166,9 @@ footer a { color: var(--muted); }
 .loading { padding: 80px 0; text-align: center; color: var(--muted); font-family: var(--font-mono); }
 
 @media (max-width: 860px) {
-  .front, .split, .about-grid { grid-template-columns: 1fr; }
+  .front, .split, .about-grid, .mcp-grid { grid-template-columns: 1fr; }
+  .mcp-grid > div:first-child { padding-right: 0; border-right: 0; padding-bottom: 24px; }
+  .mcp-grid > div:last-child { padding-left: 0; }
   .lead, .split > div:first-child { padding-right: 0; border-right: 0; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
   .side, .split > div:last-child { padding-left: 0; padding-top: 24px; }
   .about-grid > div, .about-grid > div + div { padding: 0 0 20px; border-left: 0; }
