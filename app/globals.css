@@ -156,8 +156,8 @@ ol.must a:hover { text-decoration: underline; text-underline-offset: 4px; text-d
 ol.must .w { display: block; color: var(--muted); font-size: 14px; margin-top: 4px; }
 ol.must .s { font: 500 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--accent); margin-left: 8px; }
 ul.signals { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
-ul.signals li h4 { margin: 0 0 4px; font: 600 16px/1.3 var(--font-body); display: flex; justify-content: space-between; gap: 10px; }
-ul.signals li h4 span { font: 500 12px/1.6 var(--font-mono); color: var(--muted); white-space: nowrap; }
+ul.signals li h3 { margin: 0 0 4px; font: 600 16px/1.3 var(--font-body); display: flex; justify-content: space-between; gap: 10px; }
+ul.signals li h3 span { font: 500 12px/1.6 var(--font-mono); color: var(--muted); white-space: nowrap; }
 ul.signals li p { margin: 0; color: var(--muted); font-size: 14px; }
 
 .toolbar { display: flex; gap: 10px 16px; flex-wrap: wrap; align-items: center; padding: 12px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); position: sticky; top: 0; background: var(--paper); z-index: 4; }
@@ -250,3 +250,15 @@ ul.episodes .ep-links .btn { text-decoration: none; }
   ul.episodes { grid-template-columns: 1fr; }
   ul.episodes li, ul.episodes li:nth-child(2n) { padding: 18px 0; border-left: 0; }
 }
+h2.kicker { font-size: 12px; font-weight: 600; }
+.nameplate.small { padding: 18px 0 12px; }
+.nameplate.small .home { margin: 0; font: 400 40px/1 var(--font-display); }
+.nameplate.small .home a { text-decoration: none; }
+.nameplate.small .home em { font-style: italic; color: var(--accent); }
+main.info { max-width: 720px; padding-top: 32px; padding-bottom: 64px; display: block; }
+main.info h1 { font: 400 48px/1.05 var(--font-display); margin: 0 0 10px; }
+main.info .lede { font-size: 19px; color: var(--muted); margin: 0 0 28px; }
+main.info h2 { font: 600 13px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 28px 0 10px; }
+main.info p, main.info li { font-size: 16px; line-height: 1.65; }
+main.info a { color: var(--accent); word-break: break-word; }
+.info-nav { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--rule); font: 500 13px var(--font-mono); }

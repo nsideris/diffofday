@@ -55,7 +55,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
       <main className="wrap" id="main">
         {lead && (
           <section className="block" id="top-stories" aria-labelledby="ts-h">
-            <p className="kicker" id="ts-h">Top stories · ranked by conversation</p>
+            <h2 className="kicker" id="ts-h">Top stories · ranked by conversation</h2>
             <div className="front">
               <article className="lead">
                 <span className="rank">No. 1 today</span>
@@ -132,7 +132,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
               <ul className="signals">
                 {edition.trends.map((t) => (
                   <li key={t.name}>
-                    <h4>{t.name}{t.n ? <span>{t.n} items</span> : null}</h4>
+                    <h3>{t.name}{t.n ? <span>{t.n} items</span> : null}</h3>
                     <p>{t.summary}</p>
                   </li>
                 ))}
@@ -198,7 +198,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
           </div>
         </section>
         <footer>
-          <span>Diff of the Day · made and curated by <a href={LINKEDIN} {...ext}>Nikos Sideris</a> · written with Claude</span>
+          <span>Diff of the Day · made and curated by <a href={LINKEDIN} {...ext}>Nikos Sideris</a> · written with Claude · <a href="/about">About</a> · <a href="/developers">Developers</a> · <a href="/privacy">Privacy</a> · <a href="/contact">Contact</a> · <a href="/llms.txt">llms.txt</a></span>
           {edition.notes.length > 0 && <span>Notes: {edition.notes.join(' ')}</span>}
         </footer>
       </div>

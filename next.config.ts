@@ -12,8 +12,9 @@ const config: NextConfig = {
   async headers() {
     return [
       { source: '/:path*', headers: security },
-      { source: '/', headers: cached },
-      { source: '/editions/:date', headers: cached },
+      { source: '/', headers: [...cached, { key: 'Vary', value: 'Accept' }] },
+      { source: '/editions/:date', headers: [...cached, { key: 'Vary', value: 'Accept' }] },
+      { source: '/:page(about|privacy|contact|developers)', headers: [{ key: 'Vary', value: 'Accept' }] },
       { source: '/feed.xml', headers: cached },
       { source: '/api/:path*', headers: [...cached, { key: 'Access-Control-Allow-Origin', value: '*' }] },
     ];
