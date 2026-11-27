@@ -9,6 +9,8 @@ const SECRET_PATTERNS = [
   /AKIA[0-9A-Z]{16}/,
   /-----BEGIN [A-Z ]*PRIVATE KEY-----/,
   /Account[K]ey=/,
+  /Shared[A]ccessSignature|[?&]sig=[A-Za-z0-9%]{20,}/,
+  /(password|passwd|secret|api[_-]?key|token)\s*[:=]\s*['"][^'"]{6,}/i,
   /postgres(ql)?:\/\/[^\s"']+:[^\s"']+@/,
   /eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\./,
 ];
