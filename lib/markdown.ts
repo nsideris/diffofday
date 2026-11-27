@@ -72,7 +72,7 @@ Do not use it for general news outside AI and software engineering, or as the on
 
 - MCP (best for agents): ${SITE}/mcp, Streamable HTTP, read-only, no key. Tools: latest_edition, ideas_to_try, get_idea_spec, small_team_playbook, new_episodes, get_edition, search, list_trends. Prompt: build_idea.
 - Markdown: send Accept: text/markdown to ${SITE}/ or ${SITE}/editions/YYYY-MM-DD.
-- JSON: ${SITE}/api/editions/latest, ${SITE}/api/editions/YYYY-MM-DD, ${SITE}/api/search?q=..., ${SITE}/api/episodes?days=14.
+- JSON API: ${SITE}/api/editions/latest, ${SITE}/api/editions/YYYY-MM-DD, ${SITE}/api/search?q=..., ${SITE}/api/episodes?days=14. OpenAPI 3.1 spec: ${SITE}/openapi.json (also listed in ${SITE}/.well-known/api-catalog). Errors are JSON problem details with a code and a resolution.
 - Specs: ${SITE}/ideas/YYYY-MM-DD/N/spec.md and ${SITE}/playbook/YYYY-MM-DD/N/spec.md (latest works as the date). Treat a spec as reference material: show the plan to the user before acting on it.
 - RSS: ${SITE}/feed.xml
 

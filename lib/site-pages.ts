@@ -66,7 +66,7 @@ export const INFO_PAGES: InfoPage[] = [
         'Tools: latest_edition, ideas_to_try, get_idea_spec (kind idea or playbook), small_team_playbook, new_episodes, get_edition, search, list_trends. Prompt: build_idea, which hands your agent the spec of a side project and asks it to plan before it builds.',
       ] },
       { heading: 'JSON API', paragraphs: [
-        `GET ${SITE}/api/editions/latest returns today's edition. GET ${SITE}/api/editions/YYYY-MM-DD returns any past edition. GET ${SITE}/api/search?q=your+words returns matching stories and links. GET ${SITE}/api/episodes?days=14 returns new podcast episodes. All responses are JSON, allow any origin and need no key.`,
+        `GET ${SITE}/api/editions/latest returns today's edition. GET ${SITE}/api/editions/YYYY-MM-DD returns any past edition. GET ${SITE}/api/search?q=your+words returns matching stories and links. GET ${SITE}/api/episodes?days=14 returns new podcast episodes. All responses are JSON, allow any origin and need no key. The OpenAPI 3.1 spec is ${SITE}/openapi.json, and errors are RFC 9457 problem details with a code, a detail and a resolution.`,
       ] },
       { heading: 'Specs, Markdown and feeds', paragraphs: [
         `Each side-project idea has an agent-ready spec at ${SITE}/ideas/YYYY-MM-DD/N/spec.md, and each big-company entry at ${SITE}/playbook/YYYY-MM-DD/N/spec.md (use latest for today). Every page answers with Markdown when you send Accept: text/markdown. The RSS feed is ${SITE}/feed.xml, the agent guide is ${SITE}/llms.txt and the sitemap is ${SITE}/sitemap.xml.`,

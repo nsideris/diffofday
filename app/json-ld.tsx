@@ -6,6 +6,7 @@ const PUBLISHER = {
   '@type': 'Organization',
   '@id': `${SITE}/#publisher`,
   name: 'Diff of the Day',
+  description: 'A daily briefing on what changed in AI for software engineers, with side-project specs for coding agents, big-company practices sized for small teams, an API and an MCP server.',
   url: `${SITE}/`,
   logo: `${SITE}/icon.svg`,
   founder: { '@id': `${SITE}/#author` },
