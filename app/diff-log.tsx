@@ -18,7 +18,7 @@ export function DiffLog({ hunks, date }: { hunks: Hunk[]; date: string }) {
   useEffect(() => {
     let saved: Record<string, boolean> = {};
     try { saved = JSON.parse(localStorage.getItem(FOLDED_KEY) ?? '{}'); } catch { /* storage unavailable */ }
-    const shared = decodeURIComponent(location.hash.slice(1));
+    const shared = location.hash.slice(1);
     const hunk = hunks.find((h) => h.items.some((i) => i.id === shared));
     setFolded(hunk ? { ...saved, [hunk.id]: false } : saved);
     if (hunk) requestAnimationFrame(() => document.getElementById(shared)?.scrollIntoView({ block: 'center' }));
