@@ -41,7 +41,7 @@ export async function DiffLogPage({ edition, archive, isLatest }: { edition: Edi
         <Subscribe />
       </header>
       <main className="wrap" id="main">
-        <DiffLog hunks={hunks} />
+        <DiffLog hunks={hunks} date={edition.edition} />
       </main>
       <footer className="wrap dl-foot">
         <span>Diff of the Day · made and curated by <a href={LINKEDIN} {...ext}>Nikos Sideris</a> · written with Claude · <a href={classic}>Classic view</a> · <a href="/archive">Archive</a> · <a href="/about">About</a> · <a href="/developers">Developers</a> · <a href="/privacy">Privacy</a> · <a href="/contact">Contact</a> · <a href="/llms.txt">llms.txt</a></span>

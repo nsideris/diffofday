@@ -9,15 +9,20 @@ import { SpotifyIcon } from './spotify-icon';
 const FOLDED_KEY = 'dod-folded';
 const ALL = 'All';
 
-export function DiffLog({ hunks }: { hunks: Hunk[] }) {
+export function DiffLog({ hunks, date }: { hunks: Hunk[]; date: string }) {
   const [query, setQuery] = useState('');
   const [folded, setFolded] = useState<Record<string, boolean>>({});
   const [topic, setTopic] = useState(ALL);
   const search = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    try { setFolded(JSON.parse(localStorage.getItem(FOLDED_KEY) ?? '{}')); } catch { /* storage unavailable */ }
-  }, []);
+    let saved: Record<string, boolean> = {};
+    try { saved = JSON.parse(localStorage.getItem(FOLDED_KEY) ?? '{}'); } catch { /* storage unavailable */ }
+    const shared = decodeURIComponent(location.hash.slice(1));
+    const hunk = hunks.find((h) => h.items.some((i) => i.id === shared));
+    setFolded(hunk ? { ...saved, [hunk.id]: false } : saved);
+    if (hunk) requestAnimationFrame(() => document.getElementById(shared)?.scrollIntoView({ block: 'center' }));
+  }, [hunks]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -84,11 +89,11 @@ export function DiffLog({ hunks }: { hunks: Hunk[] }) {
                   ))}
                 </div>
               )}
-              {open && (h.shown.length ? h.shown.map((i) => <Line key={i.id} item={i} />) : <p className="dl-empty">no lines match</p>)}
+              {open && (h.shown.length ? h.shown.map((i) => <Line key={i.id} item={i} date={date} />) : <p className="dl-empty">no lines match</p>)}
             </section>
           );
         })}
-        <p className="dl-help">Press / to search · click a @@ header to fold it</p>
+        <p className="dl-help">Press / to search · click a @@ header to fold it · click the sign before an item to copy its link</p>
       </div>
     </div>
   );
@@ -100,10 +105,21 @@ function matches(i: DiffItem, needle: string) {
   return `${i.title} ${i.tag ?? ''} ${i.summary ?? ''} ${i.meta.join(' ')} ${i.topic ?? ''} ${rows}`.toLowerCase().includes(needle);
 }
 
-function Line({ item }: { item: DiffItem }) {
+function Line({ item, date }: { item: DiffItem; date: string }) {
+  const [copied, setCopied] = useState(false);
+  const share = async () => {
+    const url = item.id.startsWith('listen-') && item.href ? item.href : `${location.origin}/editions/${date}#${item.id}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* clipboard blocked */ }
+  };
   return (
-    <article className="dl-line">
-      <span className={`dl-sign s${'+~▶*'.indexOf(item.sign)}`} aria-hidden="true">{item.sign}</span>
+    <article className="dl-line" id={item.id}>
+      <button type="button" className={`dl-sign s${'+~▶*'.indexOf(item.sign)}`} onClick={share} title="Copy a link to this item" aria-label={`Copy a link to: ${item.title}`}>
+        {copied ? '✓' : item.sign}
+      </button>
       <div className="dl-body">
         <h3>
           {item.href ? <a href={item.href} {...ext}>{item.title}</a> : item.title}
