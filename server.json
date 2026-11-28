@@ -1,0 +1,10 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.nsideris/diffofday",
+  "title": "Diff of the Day",
+  "description": "Daily AI briefing for engineers: ranked stories, agent-ready build specs, small-team playbooks.",
+  "repository": { "url": "https://github.com/nsideris/diffofday", "source": "github" },
+  "version": "1.0.0",
+  "websiteUrl": "https://diffofday.com",
+  "remotes": [{ "type": "streamable-http", "url": "https://diffofday.com/mcp" }]
+}
