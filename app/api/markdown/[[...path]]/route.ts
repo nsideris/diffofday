@@ -1,5 +1,5 @@
-import { editionOn, latestEdition } from '@/lib/editions';
-import { editionMarkdown, infoPageMarkdown, notFoundMarkdown } from '@/lib/markdown';
+import { editionOn, latestEdition, recentEditions } from '@/lib/editions';
+import { archiveMarkdown, editionMarkdown, infoPageMarkdown, notFoundMarkdown } from '@/lib/markdown';
 import { infoPage } from '@/lib/site-pages';
 
 export const dynamic = 'force-dynamic';
@@ -25,6 +25,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ path?: 
     const ed = await latestEdition();
     return ed ? markdown(editionMarkdown(ed)) : markdown('# Diff of the Day\n\nThe first edition is on its way.\n');
   }
+  if (path === '/archive') return markdown(archiveMarkdown(await recentEditions(1000)));
   const edition = /^\/editions\/(\d{4}-\d{2}-\d{2})$/.exec(path);
   if (edition) {
     const ed = await editionOn(edition[1]);

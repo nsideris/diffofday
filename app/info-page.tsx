@@ -4,7 +4,13 @@ import { infoPage, INFO_PAGES } from '@/lib/site-pages';
 
 export function infoMetadata(path: string): Metadata {
   const page = infoPage(path);
-  return page ? { title: `${page.title} · Diff of the Day`, description: page.description, alternates: { canonical: path } } : {};
+  if (!page) return {};
+  const title = page.title.includes('Diff of the Day') ? page.title : `${page.title} · Diff of the Day`;
+  return {
+    title, description: page.description, alternates: { canonical: path },
+    openGraph: { type: 'website', title, description: page.description, url: `https://diffofday.com${path}` },
+    twitter: { title, description: page.description },
+  };
 }
 
 function autolink(text: string) {

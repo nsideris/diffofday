@@ -30,11 +30,29 @@ export async function editionDates(limit: number): Promise<string[]> {
 
 export async function search(query: string, limit: number): Promise<SearchHit[]> {
   const rows = await sql()`
+    with q as (select websearch_to_tsquery('english', ${query}) as q),
+    specs as (
+      select e.date, 'idea' as kind, 'ideas' as path, n, x->>'title' as title, x->>'why' as summary, x->>'angle' as source,
+        setweight(to_tsvector('english', coalesce(x->>'title', '')), 'A') ||
+        setweight(to_tsvector('english', coalesce(x->>'why', '') || ' ' || coalesce(x->>'angle', '') || ' ' || coalesce(x->'steps', '[]')::text), 'B') ||
+        setweight(to_tsvector('english', coalesce(x->>'spec', '')), 'D') as search
+      from editions e cross join lateral jsonb_array_elements(coalesce(e.payload->'ideas', '[]')) with ordinality as t(x, n)
+      union all
+      select e.date, 'playbook', 'playbook', n, x->>'title', x->>'small', x->>'company',
+        setweight(to_tsvector('english', coalesce(x->>'title', '') || ' ' || coalesce(x->>'company', '')), 'A') ||
+        setweight(to_tsvector('english', coalesce(x->>'what', '') || ' ' || coalesce(x->>'why', '') || ' ' || coalesce(x->>'small', '') || ' ' || coalesce(x->'steps', '[]')::text), 'B') ||
+        setweight(to_tsvector('english', coalesce(x->>'spec', '')), 'D')
+      from editions e cross join lateral jsonb_array_elements(coalesce(e.payload->'bigco', '[]')) with ordinality as t(x, n)
+    ),
+    hits as (
+      select edition, kind, title, summary, url, source, who, ts_rank(search, q.q) as r from items, q where search @@ q.q
+      union all
+      select date, kind, title, summary, 'https://diffofday.com/' || path || '/' || to_char(date, 'YYYY-MM-DD') || '/' || n || '/spec.md', source, null,
+        ts_rank(search, q.q)
+      from specs, q where search @@ q.q
+    )
     select to_char(edition, 'YYYY-MM-DD') as edition, kind, title, summary, url, source, who
-    from items, websearch_to_tsquery('english', ${query}) q
-    where search @@ q
-    order by ts_rank(search, q) desc, edition desc
-    limit ${limit}`;
+    from hits order by r desc, edition desc limit ${limit}`;
   return rows as SearchHit[];
 }
 

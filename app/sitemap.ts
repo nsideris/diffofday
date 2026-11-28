@@ -10,6 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: `${SITE}/`, lastModified: latest, changeFrequency: 'daily', priority: 1 },
     ...INFO_PAGES.map((p) => ({ url: `${SITE}${p.path}`, lastModified: latest, changeFrequency: 'monthly' as const, priority: 0.5 })),
+    { url: `${SITE}/archive`, lastModified: latest, changeFrequency: 'daily', priority: 0.6 },
     { url: `${SITE}/llms.txt`, lastModified: latest, changeFrequency: 'daily', priority: 0.6 },
     ...editions.flatMap((e) => [
       { url: `${SITE}/editions/${e.edition}`, lastModified: e.updated, changeFrequency: 'never' as const, priority: 0.7 },

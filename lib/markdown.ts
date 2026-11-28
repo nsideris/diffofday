@@ -41,6 +41,19 @@ export function editionMarkdown(ed: Edition) {
   return parts.join('\n\n');
 }
 
+export function archiveEntries(editions: Edition[]) {
+  return editions.map((ed) => ({
+    date: ed.edition,
+    lead: ed.top[0]?.h ?? 'Edition',
+    counts: [`${ed.top.length} stories`, `${ed.ideas?.length ?? 0} ideas`, `${ed.bigco?.length ?? 0} playbook`].join(' · '),
+  }));
+}
+
+export function archiveMarkdown(editions: Edition[]) {
+  return '# Archive\n\nEvery Diff of the Day edition, newest first.\n\n' +
+    archiveEntries(editions).map((e) => `- [${e.date}](${SITE}/editions/${e.date}): ${e.lead} (${e.counts})`).join('\n') + `\n\n${FOOTER}`;
+}
+
 export function infoPageMarkdown(page: InfoPage) {
   return `# ${page.title}\n\n${page.description}\n\n` +
     page.sections.map((s) => `## ${s.heading}\n\n${s.paragraphs.join('\n\n')}`).join('\n\n') + `\n\n${FOOTER}`;
@@ -49,7 +62,7 @@ export function infoPageMarkdown(page: InfoPage) {
 export function notFoundMarkdown(path: string) {
   return `# Page not found\n\nThere is no page at ${path} on Diff of the Day.\n\n` +
     `- Today's edition: ${SITE}/ (or JSON at ${SITE}/api/editions/latest)\n` +
-    `- Past editions: ${SITE}/editions/YYYY-MM-DD\n- Agent guide: ${SITE}/llms.txt\n- Sitemap: ${SITE}/sitemap.xml\n` +
+    `- Past editions: ${SITE}/archive and ${SITE}/editions/YYYY-MM-DD\n- Agent guide: ${SITE}/llms.txt\n- Sitemap: ${SITE}/sitemap.xml\n` +
     `- Pages: ${INFO_PAGES.map((p) => SITE + p.path).join(', ')}\n\n${FOOTER}`;
 }
 
@@ -79,6 +92,7 @@ Do not use it for general news outside AI and software engineering, or as the on
 ## Pages
 
 - [Today's edition](${SITE}/)
+- [Archive](${SITE}/archive): every edition, newest first
 ${INFO_PAGES.map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}
 - [Sitemap](${SITE}/sitemap.xml)
 ${latest ? `\n## Latest edition (${latest.edition})\n\n${latest.top.map((s, i) => `${i + 1}. ${link(s.h, s.u)}`).join('\n')}\n` : ''}`;

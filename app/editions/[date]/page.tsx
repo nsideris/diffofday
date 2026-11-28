@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Diff of the Day · ${date}`,
     alternates: { canonical: `/editions/${date}` },
-    openGraph: { type: 'article', url: `https://diffofday.com/editions/${date}` },
+    openGraph: { type: 'article', title: `Diff of the Day · ${date}`, url: `https://diffofday.com/editions/${date}` },
   };
 }
 

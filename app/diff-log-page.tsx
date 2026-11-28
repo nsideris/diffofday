@@ -27,6 +27,7 @@ export async function DiffLogPage({ edition, archive, isLatest }: { edition: Edi
           <ArchiveSelect dates={archive} current={isLatest ? '' : edition.edition} />
         </div>
         <div className="right">
+          <a href="/archive">Archive</a>
           <a href={classic}>Classic view</a>
           <a href="/feed.xml">RSS</a>
           <a href={LINKEDIN} {...ext}>by Nikos Sideris</a>
@@ -41,7 +42,7 @@ export async function DiffLogPage({ edition, archive, isLatest }: { edition: Edi
         <DiffLog hunks={hunks} />
       </main>
       <footer className="wrap dl-foot">
-        <span>Diff of the Day · made and curated by <a href={LINKEDIN} {...ext}>Nikos Sideris</a> · written with Claude · <a href={classic}>Classic view</a> · <a href="/about">About</a> · <a href="/developers">Developers</a> · <a href="/privacy">Privacy</a> · <a href="/contact">Contact</a> · <a href="/llms.txt">llms.txt</a></span>
+        <span>Diff of the Day · made and curated by <a href={LINKEDIN} {...ext}>Nikos Sideris</a> · written with Claude · <a href={classic}>Classic view</a> · <a href="/archive">Archive</a> · <a href="/about">About</a> · <a href="/developers">Developers</a> · <a href="/privacy">Privacy</a> · <a href="/contact">Contact</a> · <a href="/llms.txt">llms.txt</a></span>
         {edition.notes.length > 0 && <span>Notes: {edition.notes.join(' ')}</span>}
       </footer>
     </div>
