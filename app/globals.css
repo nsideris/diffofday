@@ -358,3 +358,12 @@ ol.archive a { text-decoration: none; font-weight: 500; color: var(--ink); }
 ol.archive a .mono { color: var(--accent); margin-right: 8px; font-size: 14px; }
 ol.archive a:hover { color: var(--accent); }
 .archive-meta { font: 500 12px var(--font-mono); color: var(--muted); }
+.subscribe { margin: 16px 0 0; display: grid; gap: 6px; max-width: 520px; }
+.nameplate .subscribe { margin: 18px auto 0; text-align: left; }
+.subscribe label { font: 600 12px var(--font-mono); letter-spacing: .04em; color: var(--accent); }
+.subscribe-row { display: flex; gap: 8px; }
+.subscribe input[type=email] { flex: 1; min-width: 0; min-height: 40px; padding: 0 12px; font: 500 14px var(--font-body); color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; }
+.subscribe .btn { min-height: 40px; padding: 0 16px; background: var(--accent); border-color: var(--accent); color: var(--paper); font-weight: 600; }
+.subscribe .btn:hover { color: var(--paper); filter: brightness(1.1); }
+.subscribe p { margin: 0; font-size: 12px; color: var(--muted); }
+.subscribe p a { color: var(--accent); }

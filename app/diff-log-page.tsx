@@ -5,6 +5,7 @@ import type { Edition } from '@/lib/types';
 import { ArchiveSelect } from './archive-select';
 import { DiffLog } from './diff-log';
 import { ext } from './links';
+import { Subscribe } from './subscribe';
 
 const LINKEDIN = 'https://www.linkedin.com/in/nsideris/';
 
@@ -37,6 +38,7 @@ export async function DiffLogPage({ edition, archive, isLatest }: { edition: Edi
         <h1>Diff of the <em>Day</em></h1>
         <p className="dl-cmd mono">$ git diff {previous ?? 'yesterday'}..{edition.edition} · {changes} changes</p>
         <p className="dl-tagline">What changed in AI today, for engineers who build with it.</p>
+        <Subscribe />
       </header>
       <main className="wrap" id="main">
         <DiffLog hunks={hunks} />

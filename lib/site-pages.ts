@@ -29,7 +29,10 @@ export const INFO_PAGES: InfoPage[] = [
     description: 'What Diff of the Day collects about readers and agents, and what it does not.',
     sections: [
       { heading: 'No cookies, no accounts', paragraphs: [
-        'Diff of the Day does not set cookies, does not ask you to sign in and does not collect names, email addresses or other personal data. The only data stored in your browser is your choice of grouping in the feed (by topic or by source), kept in local storage on your own device.',
+        'Diff of the Day does not set cookies, does not ask you to sign in and does not collect personal data on this site. The only data stored in your browser is your choice of grouping in the feed (by topic or by source), kept in local storage on your own device.',
+      ] },
+      { heading: 'Email', paragraphs: [
+        'If you subscribe by email, your address goes to Buttondown (https://buttondown.com/diffofday), which sends the newsletter and keeps the subscriber list. Diff of the Day does not store it. Buttondown asks you to confirm, and every email has an unsubscribe link. The Buttondown privacy policy: https://buttondown.com/legal/privacy.',
       ] },
       { heading: 'Analytics', paragraphs: [
         'Page visits are counted with Vercel Web Analytics, which works without cookies and does not store personal data. It reports totals such as page views, referring sites, countries and device types.',

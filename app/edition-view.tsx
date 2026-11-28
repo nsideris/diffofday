@@ -5,6 +5,7 @@ import { Feed } from './feed';
 import { BigOnes } from './big-ones';
 import { Ideas } from './ideas';
 import { Listen } from './listen';
+import { Subscribe } from './subscribe';
 
 const LINKEDIN = 'https://www.linkedin.com/in/nsideris/';
 import { ext, safeUrl } from './links';
@@ -47,6 +48,7 @@ export function EditionView({ edition, archive, isLatest }: { edition: Edition; 
       <header className="nameplate"><div className="wrap">
         <h1>Diff of the <em>Day</em></h1>
         <p className="tag">What changed in AI today, for engineers who build with it</p>
+        <Subscribe />
       </div></header>
 
       <nav className="sectionnav" aria-label="Sections"><div className="wrap">
