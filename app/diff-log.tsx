@@ -65,7 +65,7 @@ export function DiffLog({ hunks, date }: { hunks: Hunk[]; date: string }) {
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="grep today’s edition: mcp, security, spotify…"
+            placeholder="grep: mcp, security, spotify…"
             aria-label="Search today’s edition"
           />
           <span className="dl-found" aria-live="polite">{needle ? `${found} of ${total}` : ''}</span>
